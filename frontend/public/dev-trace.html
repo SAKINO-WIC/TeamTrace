@@ -339,6 +339,133 @@
         font-size: 12px;
       }
 
+      .snapshot-rail {
+        display: grid;
+        grid-template-columns: minmax(0, 1.04fr) minmax(340px, 0.72fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .snapshot-panel,
+      .repo-panel,
+      .distribution-panel,
+      .module-panel {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--panel);
+        overflow: hidden;
+      }
+
+      .snapshot-panel {
+        padding: 26px;
+        background:
+          radial-gradient(circle at 8% 0, oklch(0.82 0.15 190 / 0.13), transparent 24rem),
+          var(--panel-strong);
+      }
+
+      .repo-panel {
+        display: grid;
+        align-content: space-between;
+        gap: 22px;
+        padding: 24px;
+      }
+
+      .snapshot-title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      .snapshot-title h3,
+      .repo-panel h3,
+      .distribution-panel h3,
+      .module-panel h3 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 1.18;
+      }
+
+      .snapshot-title p,
+      .repo-panel p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .commit-pill {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid oklch(0.82 0.15 190 / 0.28);
+        border-radius: 999px;
+        padding: 8px 12px;
+        background: oklch(0.82 0.15 190 / 0.09);
+        color: var(--cyan);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .snapshot-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .snapshot-metric {
+        min-height: 128px;
+        border: 1px solid oklch(1 0 0 / 0.09);
+        border-radius: 18px;
+        padding: 16px;
+        background: oklch(0.14 0.035 252 / 0.58);
+      }
+
+      .snapshot-metric strong {
+        display: block;
+        color: var(--cyan);
+        font-size: clamp(24px, 2.8vw, 34px);
+        line-height: 1;
+      }
+
+      .snapshot-metric span {
+        display: block;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .repo-links {
+        display: grid;
+        gap: 10px;
+      }
+
+      .repo-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border: 1px solid oklch(1 0 0 / 0.09);
+        border-radius: 16px;
+        padding: 14px;
+        background: oklch(0.14 0.035 252 / 0.58);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .repo-link span {
+        color: var(--faint);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .repo-link:hover {
+        border-color: var(--line-strong);
+        background: oklch(1 0 0 / 0.075);
+      }
+
       section {
         padding: 92px 0;
       }
@@ -562,6 +689,115 @@
         line-height: 1;
       }
 
+      .distribution-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+        gap: 16px;
+      }
+
+      .distribution-panel,
+      .module-panel {
+        padding: 22px;
+      }
+
+      .bar-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .bar-row {
+        display: grid;
+        gap: 7px;
+      }
+
+      .bar-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .bar-track {
+        height: 9px;
+        border-radius: 999px;
+        background: oklch(1 0 0 / 0.08);
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--cyan), var(--blue));
+      }
+
+      .module-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .module-chip {
+        min-height: 112px;
+        border: 1px solid oklch(1 0 0 / 0.09);
+        border-radius: 17px;
+        padding: 15px;
+        background: oklch(0.14 0.035 252 / 0.54);
+      }
+
+      .module-chip strong {
+        display: block;
+        color: var(--text);
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .module-chip span {
+        display: block;
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .file-table {
+        max-height: 310px;
+        margin-top: 18px;
+        border: 1px solid oklch(1 0 0 / 0.08);
+        border-radius: 18px;
+        overflow: auto;
+        background: oklch(0.12 0.032 252 / 0.68);
+      }
+
+      .file-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 84px 104px;
+        gap: 12px;
+        align-items: center;
+        border-bottom: 1px solid oklch(1 0 0 / 0.065);
+        padding: 11px 14px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .file-row:last-child {
+        border-bottom: 0;
+      }
+
+      .file-row.header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background: oklch(0.15 0.038 252 / 0.96);
+        color: var(--text);
+        font-weight: 950;
+      }
+
       .quote-strip {
         border: 1px solid var(--line);
         border-radius: 28px;
@@ -622,12 +858,16 @@
       @media (max-width: 920px) {
         .hero-inner,
         .section-head,
-        .stack-grid {
+        .stack-grid,
+        .snapshot-rail,
+        .distribution-grid {
           grid-template-columns: 1fr;
         }
 
         .capability-grid,
-        .anatomy-grid {
+        .anatomy-grid,
+        .snapshot-grid,
+        .module-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
@@ -672,8 +912,14 @@
 
         .pulse-grid,
         .capability-grid,
-        .anatomy-grid {
+        .anatomy-grid,
+        .snapshot-grid,
+        .module-grid {
           grid-template-columns: 1fr;
+        }
+
+        .file-row {
+          grid-template-columns: minmax(0, 1fr);
         }
 
         .timeline-card {
@@ -804,6 +1050,54 @@
           </div>
         </section>
 
+        <section id="delivery">
+          <div class="section-inner">
+            <div class="section-head" data-reveal>
+              <div>
+                <p class="section-kicker">DELIVERY SNAPSHOT</p>
+                <h2>最终合仓后的真实工程数据。</h2>
+              </div>
+              <p class="section-desc">
+                这里展示的是最终单仓 `SAKINO-WIC/TeamTrace` 的静态快照数据；右上角的用户、班级、任务统计仍从生产公开接口实时读取，两类数据口径分开显示。
+              </p>
+            </div>
+
+            <div class="snapshot-rail">
+              <article class="snapshot-panel" data-reveal>
+                <div class="snapshot-title">
+                  <div>
+                    <h3>GitHub main 交付快照</h3>
+                    <p>commit `73ca0e1`，生产端最终整理版本。</p>
+                  </div>
+                  <span class="commit-pill">2026-06-20 Final</span>
+                </div>
+                <div class="snapshot-grid">
+                  <div class="snapshot-metric"><strong>543</strong><span>Git 跟踪文件</span></div>
+                  <div class="snapshot-metric"><strong>6.60 MB</strong><span>仓库源码体积</span></div>
+                  <div class="snapshot-metric"><strong>111,055</strong><span>文本代码与文档行</span></div>
+                  <div class="snapshot-metric"><strong>32</strong><span>后端测试文件</span></div>
+                  <div class="snapshot-metric"><strong>165</strong><span>前端文件</span></div>
+                  <div class="snapshot-metric"><strong>362</strong><span>后端文件</span></div>
+                  <div class="snapshot-metric"><strong>38</strong><span>Vue 页面视图</span></div>
+                  <div class="snapshot-metric"><strong>34</strong><span>Vue 组件</span></div>
+                </div>
+              </article>
+
+              <aside class="repo-panel" data-reveal>
+                <div>
+                  <h3>公开交付入口</h3>
+                  <p>用于课程展示、代码审阅和生产访问的最终入口。</p>
+                </div>
+                <div class="repo-links">
+                  <a class="repo-link" href="https://github.com/SAKINO-WIC/TeamTrace" target="_blank" rel="noreferrer">GitHub 仓库 <span>SAKINO-WIC/TeamTrace</span></a>
+                  <a class="repo-link" href="https://teamtrace.cloud" target="_blank" rel="noreferrer">生产系统 <span>teamtrace.cloud</span></a>
+                  <a class="repo-link" href="/#/auth">登录入口 <span>返回 TeamTrace</span></a>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
         <section id="timeline">
           <div class="section-inner">
             <div class="section-head" data-reveal>
@@ -867,16 +1161,70 @@
             <div class="section-head" data-reveal>
               <div>
                 <p class="section-kicker">CODE ANATOMY</p>
-                <h2>当前代码体量。</h2>
+                <h2>文件结构和模块分布。</h2>
               </div>
-              <p class="section-desc">前端页面体系、后端接口和数据仓储共同构成了当前 TeamTrace 的工程规模。</p>
+              <p class="section-desc">统计口径来自最终合仓仓库的 Git 跟踪文件，不包含 `node_modules`、构建产物、日志、上传文件和真实配置。</p>
             </div>
 
             <div class="anatomy-grid">
-              <article class="anatomy-card" data-reveal><strong>67k+</strong><h3>源码行数</h3><p>前端约 54,601 行，后端 Java 约 12,988 行。</p></article>
-              <article class="anatomy-card" data-reveal><strong>36</strong><h3>后端控制器</h3><p>覆盖认证、教师、学生、管理员、报告、通知、上传等模块。</p></article>
-              <article class="anatomy-card" data-reveal><strong>33</strong><h3>前端页面</h3><p>学生端、教师端、管理员端、认证页、产品页和自由协作入口。</p></article>
-              <article class="anatomy-card" data-reveal><strong>19</strong><h3>数据仓库</h3><p>以 JPA Repository 管理用户、班级、任务、子任务、评分、申诉等数据。</p></article>
+              <article class="anatomy-card" data-reveal><strong>56,907</strong><h3>Vue 行数</h3><p>学生端、教师端、管理员端、产品介绍页和自由协作 Beta 的页面与组件。</p></article>
+              <article class="anatomy-card" data-reveal><strong>24,435</strong><h3>Java 行数</h3><p>Controller、Service、Repository、Entity、DTO、Scheduler 和安全过滤器。</p></article>
+              <article class="anatomy-card" data-reveal><strong>9,837</strong><h3>CSS 行数</h3><p>三端工作台、登录页、玻璃液态风格、自由协作布局和响应式适配。</p></article>
+              <article class="anatomy-card" data-reveal><strong>8,376</strong><h3>JS 行数</h3><p>API 服务、工具函数、路由、会话隔离、媒体路径和前端运行时逻辑。</p></article>
+            </div>
+
+            <div class="distribution-grid" style="margin-top: 16px">
+              <article class="distribution-panel" data-reveal>
+                <h3>目录分布</h3>
+                <div class="bar-list">
+                  <div class="bar-row">
+                    <div class="bar-meta"><span>frontend</span><strong>165 files / 83,442 lines</strong></div>
+                    <div class="bar-track"><span class="bar-fill" style="width: 75.1%"></span></div>
+                  </div>
+                  <div class="bar-row">
+                    <div class="bar-meta"><span>backend</span><strong>362 files / 24,842 lines</strong></div>
+                    <div class="bar-track"><span class="bar-fill" style="width: 22.4%"></span></div>
+                  </div>
+                  <div class="bar-row">
+                    <div class="bar-meta"><span>docs</span><strong>10 files / 2,460 lines</strong></div>
+                    <div class="bar-track"><span class="bar-fill" style="width: 2.2%"></span></div>
+                  </div>
+                  <div class="bar-row">
+                    <div class="bar-meta"><span>database + ops + root</span><strong>6 files / 311 lines</strong></div>
+                    <div class="bar-track"><span class="bar-fill" style="width: 0.3%"></span></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module-panel" data-reveal>
+                <h3>代码模块</h3>
+                <div class="module-grid">
+                  <div class="module-chip"><strong>42</strong><span>后端 Controller</span></div>
+                  <div class="module-chip"><strong>44</strong><span>后端 Service 文件</span></div>
+                  <div class="module-chip"><strong>35</strong><span>JPA Repository</span></div>
+                  <div class="module-chip"><strong>35</strong><span>数据库实体</span></div>
+                  <div class="module-chip"><strong>10</strong><span>前端 API service</span></div>
+                  <div class="module-chip"><strong>25</strong><span>前端工具模块</span></div>
+                  <div class="module-chip"><strong>23</strong><span>样式文件</span></div>
+                  <div class="module-chip"><strong>15</strong><span>自由协作组件</span></div>
+                  <div class="module-chip"><strong>24</strong><span>自由协作 DTO</span></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="distribution-panel" style="margin-top: 16px" data-reveal>
+              <h3>文件类型明细</h3>
+              <div class="file-table">
+                <div class="file-row header"><span>类型</span><span>文件数</span><span>文本行数</span></div>
+                <div class="file-row"><span>.java</span><span>346</span><span>24,435</span></div>
+                <div class="file-row"><span>.vue</span><span>73</span><span>56,907</span></div>
+                <div class="file-row"><span>.js</span><span>46</span><span>8,376</span></div>
+                <div class="file-row"><span>.css</span><span>23</span><span>9,837</span></div>
+                <div class="file-row"><span>.md</span><span>25</span><span>6,390</span></div>
+                <div class="file-row"><span>.html</span><span>3</span><span>1,312</span></div>
+                <div class="file-row"><span>.json</span><span>3</span><span>3,278</span></div>
+                <div class="file-row"><span>配置与模板</span><span>24</span><span>520+</span></div>
+              </div>
             </div>
           </div>
         </section>
