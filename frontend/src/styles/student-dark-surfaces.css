@@ -1,0 +1,412 @@
+/**
+ * Student dark/light surfaces — override scoped hardcoded whites in student views
+ */
+[data-student-theme='dark'] {
+  color: var(--tt-text);
+}
+
+[data-student-theme='dark'] h1,
+[data-student-theme='dark'] h2,
+[data-student-theme='dark'] h3,
+[data-student-theme='dark'] .class-name,
+[data-student-theme='dark'] .metric-value,
+[data-student-theme='dark'] .summary-card strong,
+[data-student-theme='dark'] .tab-btn strong,
+[data-student-theme='dark'] .title-block h2 {
+  color: var(--tt-text) !important;
+}
+
+[data-student-theme='dark'] .metric-label,
+[data-student-theme='dark'] .class-meta,
+[data-student-theme='dark'] label span,
+[data-student-theme='dark'] .empty-card p {
+  color: var(--tt-text-secondary) !important;
+}
+
+[data-student-theme='dark'] .student-header {
+  background: var(--student-header-bg) !important;
+  border-color: var(--tt-border) !important;
+}
+
+[data-student-theme='dark'] .student-header .profile-btn {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+[data-student-theme='dark'] .student-header .profile-avatar {
+  background: var(--tt-accent-gradient, linear-gradient(135deg, #3b82f6, #60a5fa)) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+}
+
+[data-student-theme='dark'] .tool-popover .profile-avatar.large {
+  background: var(--tt-accent-gradient, linear-gradient(135deg, #3b82f6, #60a5fa)) !important;
+  color: #fff !important;
+}
+
+[data-student-theme='dark'] .crumb {
+  color: var(--tt-text-secondary) !important;
+}
+
+[data-student-theme='dark'] .crumb:hover {
+  color: var(--tt-text) !important;
+}
+
+[data-student-theme='dark'] .class-card {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--tt-accent) 16%, transparent), transparent 42%),
+    linear-gradient(165deg, var(--tt-surface), var(--tt-surface-muted)) !important;
+  border-color: color-mix(in srgb, var(--tt-accent) 18%, var(--tt-border)) !important;
+  box-shadow: var(--tt-shadow-sm) !important;
+}
+
+[data-student-theme='dark'] .class-card.ended {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(148, 163, 184, 0.1), transparent 40%),
+    linear-gradient(165deg, var(--tt-surface-muted), var(--tt-surface)) !important;
+}
+
+[data-student-theme='dark'] .metric-box:not(.class-card .metric-box),
+[data-student-theme='dark'] .error-card,
+[data-student-theme='dark'] .summary-chip {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] .class-card .metric-box--code {
+  background: color-mix(in srgb, var(--tt-accent) 14%, var(--tt-surface-muted)) !important;
+  border-color: color-mix(in srgb, var(--tt-accent) 24%, var(--tt-border-subtle)) !important;
+}
+
+[data-student-theme='dark'] .class-card .metric-box--teacher {
+  background: color-mix(in srgb, #6366f1 16%, var(--tt-surface-muted)) !important;
+  border-color: color-mix(in srgb, #6366f1 28%, var(--tt-border-subtle)) !important;
+}
+
+[data-student-theme='dark'] .class-card .metric-box--group {
+  background: color-mix(in srgb, #10b981 14%, var(--tt-surface-muted)) !important;
+  border-color: color-mix(in srgb, #10b981 26%, var(--tt-border-subtle)) !important;
+}
+
+[data-student-theme='dark'] .class-card .metric-box--tasks {
+  background: color-mix(in srgb, #f59e0b 14%, var(--tt-surface-muted)) !important;
+  border-color: color-mix(in srgb, #f59e0b 26%, var(--tt-border-subtle)) !important;
+}
+
+[data-student-theme='dark'] .summary-chip.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+}
+
+[data-student-theme='dark'] .status-badge {
+  background: var(--tt-accent-soft) !important;
+  color: var(--tt-accent) !important;
+}
+
+[data-student-theme='dark'] .status-badge.ended {
+  background: var(--tt-surface-muted) !important;
+  color: var(--tt-text-secondary) !important;
+}
+
+[data-student-theme='dark'] .error-card {
+  border-color: color-mix(in srgb, var(--tt-danger) 24%, var(--tt-border)) !important;
+}
+
+[data-student-theme='dark'] .student-page .card,
+[data-student-theme='dark'] .student-page .appeal-hero,
+[data-student-theme='dark'] .student-page .appeal-queue,
+[data-student-theme='dark'] .student-page .appeal-detail {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--tt-accent) 10%, transparent), transparent 42%),
+    linear-gradient(165deg, var(--tt-surface), var(--tt-surface-muted)) !important;
+  border: 1px solid var(--tt-border) !important;
+  box-shadow: var(--tt-shadow-sm) !important;
+}
+
+[data-student-theme='dark'] .student-page .detail-grid > div,
+[data-student-theme='dark'] .student-page .detail-grid div,
+[data-student-theme='dark'] .student-page .detail-block,
+[data-student-theme='dark'] .student-page .tab-btn,
+[data-student-theme='dark'] .student-page .appeal-row,
+[data-student-theme='dark'] .student-page .empty-state,
+[data-student-theme='dark'] .student-page .message {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] .student-page .tab-btn.active,
+[data-student-theme='dark'] .student-page .appeal-row.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+[data-student-theme='dark'] .student-page .filter-panel {
+  background: var(--tt-surface) !important;
+  border: 1px solid var(--tt-border-subtle) !important;
+  border-radius: 20px !important;
+}
+
+/* ── Task detail / score / peer review nested surfaces ── */
+[data-student-theme='dark'] .context-item,
+[data-student-theme='dark'] .context-summary-item,
+[data-student-theme='dark'] .score-item,
+[data-student-theme='dark'] .score-list,
+[data-student-theme='dark'] .score-row,
+[data-student-theme='dark'] .formula-panel,
+[data-student-theme='dark'] .pool-card,
+[data-student-theme='dark'] .my-task-card,
+[data-student-theme='dark'] .bento-surface,
+[data-student-theme='dark'] .batch-row,
+[data-student-theme='dark'] .progress-hero,
+[data-student-theme='dark'] .member-progress-strip,
+[data-student-theme='dark'] .member-progress-card,
+[data-student-theme='dark'] .support-panel,
+[data-student-theme='dark'] .task-desc-panel,
+[data-student-theme='dark'] .submit-panel,
+[data-student-theme='dark'] .reviews-panel,
+[data-student-theme='dark'] .review-row,
+[data-student-theme='dark'] .member-option,
+[data-student-theme='dark'] .type-option,
+[data-student-theme='dark'] .urgent-card,
+[data-student-theme='dark'] .kpi-card,
+[data-student-theme='dark'] .notification-row,
+[data-student-theme='dark'] .task-card,
+[data-student-theme='dark'] .invite-card,
+[data-student-theme='dark'] .pending-card,
+[data-student-theme='dark'] .member-card,
+[data-student-theme='dark'] .score-composition-embedded .card,
+[data-student-theme='dark'] .score-summary .card,
+[data-student-theme='dark'] .peer-reviews .card,
+[data-student-theme='dark'] .task-appeals-page .card,
+[data-student-theme='dark'] .student-home .empty-state,
+[data-student-theme='dark'] .student-home .join-box,
+[data-student-theme='dark'] .student-tasks .task-card,
+[data-student-theme='dark'] .student-notifications .summary-card,
+[data-student-theme='dark'] .student-appeals .summary-card,
+[data-student-theme='dark'] .class-detail .detail-panel,
+[data-student-theme='dark'] .member-row,
+[data-student-theme='dark'] .member-row--teacher,
+[data-student-theme='dark'] .class-detail .member-card {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] .member-row.is-me {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+[data-student-theme='dark'] .member-row--teacher {
+  background: color-mix(in srgb, #f59e0b 10%, var(--tt-surface-muted)) !important;
+  border-color: color-mix(in srgb, #f59e0b 22%, var(--tt-border-subtle)) !important;
+}
+
+[data-student-theme='dark'] .leader-tag {
+  background: color-mix(in srgb, #22c55e 14%, var(--tt-surface-muted)) !important;
+  color: #86efac !important;
+  border-color: color-mix(in srgb, #22c55e 24%, var(--tt-border)) !important;
+}
+
+[data-student-theme='dark'] .teacher-tag {
+  background: color-mix(in srgb, #f59e0b 14%, var(--tt-surface-muted)) !important;
+  color: #fbbf24 !important;
+  border-color: color-mix(in srgb, #f59e0b 24%, var(--tt-border)) !important;
+}
+[data-student-theme='dark'] .class-detail .task-card {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+  color: var(--tt-text);
+  box-shadow: none !important;
+}
+
+[data-student-theme='dark'] .student-page .card,
+[data-student-theme='dark'] .student-class-hub .empty-card,
+[data-student-theme='dark'] .student-class-hub .filter-panel {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--tt-accent) 10%, transparent), transparent 42%),
+    linear-gradient(165deg, var(--tt-surface), var(--tt-surface-muted)) !important;
+  border-color: var(--tt-border) !important;
+}
+
+[data-student-theme='dark'] .pool-card,
+[data-student-theme='dark'] .my-task-card {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--tt-accent) 10%, transparent), transparent 38%),
+    var(--tt-surface) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28) !important;
+}
+
+[data-student-theme='dark'] .context-item strong,
+[data-student-theme='dark'] .score-item strong,
+[data-student-theme='dark'] .score-row-value,
+[data-student-theme='dark'] .formula-panel strong,
+[data-student-theme='dark'] .context-summary-item .context-value,
+[data-student-theme='dark'] .context-value,
+[data-student-theme='dark'] .task-title,
+[data-student-theme='dark'] .task-card-title,
+[data-student-theme='dark'] .pool-card-body .task-name,
+[data-student-theme='dark'] h1,
+[data-student-theme='dark'] h2,
+[data-student-theme='dark'] h3,
+[data-student-theme='dark'] h4 {
+  color: var(--tt-text) !important;
+}
+
+[data-student-theme='dark'] .context-item span,
+[data-student-theme='dark'] .score-item span,
+[data-student-theme='dark'] .score-row-label,
+[data-student-theme='dark'] .score-item p,
+[data-student-theme='dark'] .score-row p,
+[data-student-theme='dark'] .formula-panel p,
+[data-student-theme='dark'] .formula-panel span,
+[data-student-theme='dark'] .context-summary-item .label,
+[data-student-theme='dark'] .task-desc-body,
+[data-student-theme='dark'] .task-note,
+[data-student-theme='dark'] .urgent-detail,
+[data-student-theme='dark'] .row-meta,
+[data-student-theme='dark'] .row-time {
+  color: var(--tt-text-secondary) !important;
+}
+
+[data-student-theme='dark'] .score-row--total {
+  background: color-mix(in srgb, var(--tt-accent) 8%, var(--tt-surface-muted)) !important;
+}
+
+[data-student-theme='dark'] .score-row--total .score-row-value {
+  color: var(--tt-accent) !important;
+}
+
+[data-student-theme='dark'] .score-list,
+[data-student-theme='dark'] .score-row {
+  border-color: var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] .task-tabs {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] .task-tabs .tab-btn {
+  color: var(--tt-text-secondary) !important;
+  background: transparent !important;
+}
+
+[data-student-theme='dark'] .task-tabs .tab-btn.active {
+  background: var(--tt-surface) !important;
+  color: var(--tt-accent) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28) !important;
+}
+
+[data-student-theme='dark'] .metric-box--code,
+[data-student-theme='dark'] .metric-box--teacher,
+[data-student-theme='dark'] .metric-box--group,
+[data-student-theme='dark'] .metric-box--tasks,
+[data-student-theme='dark'] .pool-meta-box,
+[data-student-theme='dark'] .submit-field textarea,
+[data-student-theme='dark'] .submit-field input {
+  background: color-mix(in srgb, var(--tt-accent) 8%, var(--tt-surface-muted)) !important;
+  border-color: var(--tt-border-subtle) !important;
+  color: var(--tt-text) !important;
+}
+
+[data-student-theme='dark'] .assign-pill,
+[data-student-theme='dark'] .default-pill {
+  background: var(--tt-accent-soft) !important;
+  color: var(--tt-accent) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+[data-student-theme='dark'] .assign-pill.unclaimed {
+  background: color-mix(in srgb, var(--tt-danger) 14%, var(--tt-surface-muted)) !important;
+  color: #fca5a5 !important;
+  border-color: color-mix(in srgb, var(--tt-danger) 28%, var(--tt-border)) !important;
+}
+
+[data-student-theme='dark'] .status-pill.status-1,
+[data-student-theme='dark'] .task-tags .task-status.closed,
+[data-student-theme='dark'] .task-tags .task-status.ended {
+  background: var(--tt-surface) !important;
+  color: var(--tt-text-secondary) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] .status-pill.status-2,
+[data-student-theme='dark'] .task-tags .task-kind {
+  background: var(--tt-accent-soft) !important;
+  color: var(--tt-accent) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+[data-student-theme='dark'] .status-pill.status-3 {
+  background: color-mix(in srgb, #f59e0b 16%, var(--tt-surface-muted)) !important;
+  color: #fbbf24 !important;
+  border-color: color-mix(in srgb, #f59e0b 28%, var(--tt-border)) !important;
+}
+
+[data-student-theme='dark'] .status-pill.status-4 {
+  background: color-mix(in srgb, #22c55e 14%, var(--tt-surface-muted)) !important;
+  color: #86efac !important;
+  border-color: color-mix(in srgb, #22c55e 26%, var(--tt-border)) !important;
+}
+
+[data-student-theme='dark'] .progress-track,
+[data-student-theme='dark'] .progress-bar-wrap {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] input,
+[data-student-theme='dark'] textarea,
+[data-student-theme='dark'] select,
+[data-student-theme='dark'] .student-page input,
+[data-student-theme='dark'] .student-page textarea,
+[data-student-theme='dark'] .student-page select {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+[data-student-theme='dark'] input::placeholder,
+[data-student-theme='dark'] textarea::placeholder {
+  color: var(--tt-text-tertiary) !important;
+}
+
+[data-student-theme='dark'] .secondary-btn,
+[data-student-theme='dark'] .outlined-btn,
+[data-student-theme='dark'] .ghost-btn,
+[data-student-theme='dark'] .back-btn {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+[data-student-theme='dark'] .option-btn {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+  color: var(--tt-text-secondary) !important;
+}
+
+[data-student-theme='dark'] .option-btn.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+}
+
+[data-student-theme='dark'] .type-option.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+}
+
+[data-student-theme='dark'] .member-option.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+[data-student-theme='dark'] .skeleton-row,
+[data-student-theme='dark'] .skeleton-card,
+[data-student-theme='dark'] .class-skeleton {
+  background: var(--tt-surface-muted) !important;
+}

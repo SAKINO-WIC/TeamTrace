@@ -1,0 +1,698 @@
+/* ═══════════════════════════════════════════════
+   TeamTrace — Unified Design System
+   Palette: warm neutrals, one accent, zero noise
+   ═══════════════════════════════════════════════ */
+
+/* Layout / typography / motion — shared by all themes */
+:root {
+  --tt-radius-sm: 6px;
+  --tt-radius-md: 10px;
+  --tt-radius-lg: 14px;
+  --tt-radius-xl: 18px;
+  --tt-radius-full: 9999px;
+
+  --tt-space-1: 4px;
+  --tt-space-2: 8px;
+  --tt-space-3: 12px;
+  --tt-space-4: 16px;
+  --tt-space-5: 20px;
+  --tt-space-6: 24px;
+  --tt-space-8: 32px;
+  --tt-space-10: 40px;
+  --tt-space-12: 48px;
+
+  --tt-font: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --tt-font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  --tt-text-xs: 11px;
+  --tt-text-sm: 13px;
+  --tt-text-base: 14px;
+  --tt-text-lg: 16px;
+  --tt-text-xl: 20px;
+  --tt-text-2xl: 24px;
+  --tt-text-3xl: 30px;
+
+  --tt-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --tt-duration-fast: 150ms;
+  --tt-duration-normal: 200ms;
+  --tt-duration-slow: 700ms;
+  --tt-ease-ios: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --tt-sidebar-width: 260px;
+  --tt-sidebar-collapsed-width: 72px;
+  --tt-dialog-available-width: 100%;
+  --tt-header-height: 64px;
+  --tt-content-max-width: 1400px;
+  --tt-page-padding: clamp(16px, 2vw, 24px);
+}
+
+:root:not([data-teacher-theme='midnight-classroom']):not([data-student-theme='dark']) {
+  color-scheme: light;
+
+  /* ── Background ── */
+  --tt-bg: #fafafa;
+  --tt-bg-elevated: #ffffff;
+  --tt-bg-sunken: #f5f5f5;
+  --tt-bg-overlay: rgba(255, 255, 255, 0.85);
+  --tt-surface-glass: rgba(255, 255, 255, 0.78);
+  --tt-surface-glass-strong: rgba(255, 255, 255, 0.9);
+  --tt-bg-glow:
+    radial-gradient(circle at 8% 0%, rgba(0, 82, 255, 0.08), transparent 30%),
+    radial-gradient(circle at 92% 12%, rgba(77, 124, 255, 0.06), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #fafafa 44%, #f8fafc 100%);
+
+  /* ── Surface ── */
+  --tt-surface: #ffffff;
+  --tt-surface-hover: #f9fafb;
+  --tt-surface-active: #f3f4f6;
+  --tt-surface-muted: #f5f5f5;
+
+  /* ── Border ── */
+  --tt-border: #e5e7eb;
+  --tt-border-subtle: #f0f0f0;
+  --tt-border-strong: #d1d5db;
+  --tt-divider: #f0f0f0;
+
+  /* ── Text ── */
+  --tt-text: #111827;
+  --tt-text-secondary: #6b7280;
+  --tt-text-tertiary: #9ca3af;
+  --tt-text-inverse: #ffffff;
+
+  /* ── Accent — one refined blue ── */
+  --tt-accent: #0052ff;
+  --tt-accent-secondary: #4d7cff;
+  --tt-accent-hover: #003fd1;
+  --tt-accent-soft: rgba(0, 82, 255, 0.08);
+  --tt-accent-border: rgba(0, 82, 255, 0.18);
+  --tt-accent-gradient: linear-gradient(135deg, var(--tt-accent), var(--tt-accent-secondary));
+  --tt-accent-gradient-live: linear-gradient(120deg, #0052ff 0%, #4d7cff 48%, #00b8ff 100%);
+
+  /* ── States ── */
+  --tt-success: #16a34a;
+  --tt-success-soft: rgba(22, 163, 74, 0.08);
+  --tt-warning: #d97706;
+  --tt-warning-soft: rgba(217, 119, 6, 0.08);
+  --tt-danger: #dc2626;
+  --tt-danger-soft: rgba(220, 38, 38, 0.06);
+
+  /* ── Shadows ── */
+  --tt-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --tt-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --tt-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --tt-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --tt-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.1);
+  --tt-shadow-accent: 0 10px 24px rgba(0, 82, 255, 0.22);
+  --tt-shadow-accent-lg: 0 18px 42px rgba(0, 82, 255, 0.28);
+}
+
+/* Theme is controlled explicitly via data-teacher-theme / data-student-theme — not OS preference. */
+
+@keyframes tt-float-soft {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+}
+
+@keyframes tt-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.35); }
+}
+
+@keyframes tt-sheen {
+  0% { transform: translateX(-120%) rotate(18deg); }
+  100% { transform: translateX(160%) rotate(18deg); }
+}
+
+@keyframes tt-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tt-glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes tt-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── SaaS Dynamic Utility Classes ── */
+
+/* Floating glow orb behind cards */
+.tt-glow-bg {
+  position: relative;
+}
+.tt-glow-bg::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(0, 82, 255, 0.08), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(77, 124, 255, 0.06), transparent 50%);
+  animation: tt-glow-pulse 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Live pulse dot */
+.tt-live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tt-success);
+  animation: tt-pulse-dot 2s ease-in-out infinite;
+}
+
+.tt-live-dot.accent {
+  background: var(--tt-accent);
+}
+
+/* Brand sheen sweep on hover */
+.tt-sheen-hover {
+  position: relative;
+  overflow: hidden;
+}
+.tt-sheen-hover::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+  transform: translateX(-120%) rotate(18deg);
+  pointer-events: none;
+  transition: none;
+}
+.tt-sheen-hover:hover::after {
+  animation: tt-sheen 0.7s ease forwards;
+}
+
+/* Page entry animation */
+.tt-enter {
+  animation: tt-fade-up 0.4s var(--tt-ease) both;
+}
+.tt-enter-delay-1 { animation-delay: 0.06s; }
+.tt-enter-delay-2 { animation-delay: 0.12s; }
+.tt-enter-delay-3 { animation-delay: 0.18s; }
+.tt-enter-delay-4 { animation-delay: 0.24s; }
+
+/* Floating animation */
+.tt-float {
+  animation: tt-float-soft 4s ease-in-out infinite;
+}
+
+/* Accent gradient text */
+.tt-gradient-text {
+  background: var(--tt-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Live workspace badge */
+.tt-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--tt-radius-full);
+  background: var(--tt-success-soft);
+  color: var(--tt-success);
+  font-size: var(--tt-text-xs);
+  font-weight: 600;
+}
+.tt-live-badge .tt-live-dot {
+  width: 6px;
+  height: 6px;
+}
+
+/* ═══════════════════════════════════════════════
+   Dynamic Background & Glass System
+   ═══════════════════════════════════════════════ */
+
+html,
+body,
+#app {
+  min-height: 100%;
+  background: radial-gradient(circle at top, var(--tt-bg) 0%, var(--tt-bg-sunken) 100%);
+  color: var(--tt-text);
+}
+
+/* Dynamic background glow for all layouts */
+.student-layout,
+.teacher-layout,
+.admin-layout,
+.auth-layout,
+.auth-page {
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(0, 82, 255, 0.06), transparent 32%),
+    radial-gradient(circle at 88% 14%, rgba(77, 124, 255, 0.05), transparent 30%),
+    radial-gradient(circle at 18% 88%, rgba(168, 85, 247, 0.04), transparent 34%),
+    linear-gradient(180deg, var(--tt-bg) 0%, var(--tt-bg-sunken) 100%);
+}
+
+/* Glass card base */
+.glass-card,
+.glass-sidebar,
+.glass-modal {
+  background: var(--tt-bg-overlay);
+  border: 1px solid var(--tt-border);
+  border-radius: var(--tt-radius-xl);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: var(--tt-shadow-md);
+}
+
+.glass-card-hover {
+  transition: transform var(--tt-duration-slow) var(--tt-ease-ios),
+              box-shadow var(--tt-duration-slow) var(--tt-ease-ios),
+              border-color var(--tt-duration-slow) var(--tt-ease-ios);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--tt-shadow-lg), var(--tt-shadow-accent);
+  border-color: var(--tt-accent-border);
+}
+
+/* Content-dense areas stay solid */
+.solid-card,
+.table-card,
+.table-wrap,
+.table-scroll,
+.el-table,
+.el-table__inner-wrapper,
+.el-table th.el-table__cell,
+.el-table td.el-table__cell {
+  background: var(--tt-surface) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Element Plus dialog glass */
+.el-overlay-dialog .el-dialog {
+  background: var(--tt-bg-overlay);
+  border: 1px solid var(--tt-border);
+  border-radius: var(--tt-radius-xl);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: var(--tt-shadow-xl);
+}
+
+/* Fallback for no backdrop-filter */
+@supports not ((backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))) {
+  .glass-card,
+  .glass-sidebar,
+  .glass-modal,
+  .el-overlay-dialog .el-dialog {
+    background: var(--tt-bg-overlay) !important;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+  font-family: var(--tt-font);
+  font-size: var(--tt-text-base);
+  line-height: 1.5;
+  color: var(--tt-text);
+  background: var(--tt-bg);
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Element Plus overrides ── */
+.el-dialog {
+  border-radius: var(--tt-radius-xl) !important;
+  box-shadow: var(--tt-shadow-xl) !important;
+}
+
+.el-table {
+  --el-table-border-color: var(--tt-border);
+  --el-table-header-bg-color: var(--tt-bg-sunken);
+  font-size: var(--tt-text-sm);
+}
+
+.el-table th.el-table__cell {
+  font-weight: 600;
+}
+
+.el-input__wrapper,
+.el-select__wrapper {
+  border-radius: var(--tt-radius-md) !important;
+}
+
+.el-button--primary {
+  --el-button-bg-color: var(--tt-accent);
+  --el-button-border-color: var(--tt-accent);
+  --el-button-hover-bg-color: var(--tt-accent-hover);
+  --el-button-hover-border-color: var(--tt-accent-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--tt-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   Dark Mode Override — Fix hardcoded white backgrounds
+   ═══════════════════════════════════════════════ */
+
+[data-student-theme='dark'],
+[data-teacher-theme='midnight-classroom'],
+[data-admin-theme='dark'],
+[data-admin-theme='midnight-console'] {
+  color-scheme: dark;
+
+  /* Override hardcoded white backgrounds with CSS variables */
+  .card,
+  .stat-card,
+  .kpi-card,
+  .class-card,
+  .task-card,
+  .group-card,
+  .panel,
+  .hero,
+  .detail-panel,
+  .context-panel,
+  .info-header,
+  .workbench,
+  .workbench-body,
+  .queue-panel,
+  .detail-panel,
+  .queue-item,
+  .teacher-subview .topbar,
+  .reason-box,
+  .action-panel,
+  .queue-search,
+  .attachment-empty,
+  .summary-card,
+  .info-item,
+  .guide-card,
+  .faq-item,
+  .notice-item,
+  .filter-bar,
+  .filters,
+  .table-wrap,
+  .table-panel,
+  .score-panel,
+  .class-card-inner,
+  .task-row,
+  .group-row,
+  .student-row,
+  .appeal-row,
+  .metric-card,
+  .chart-card,
+  .insight-item,
+  .strength-card,
+  .dialog-panel,
+  .modal-panel,
+  .empty-state,
+  .toolbar,
+  .tab-bar,
+  .segmented,
+  .crumb,
+  .class-switcher-btn,
+  .class-switcher-menu,
+  .report-pdf-root,
+  .scope-tab,
+  .mode-panel,
+  .settings-panel,
+  .settings-tab,
+  .teacher-header,
+  .workspace-panel,
+  .note-card,
+  .rule-pill,
+  .group-score-card,
+  .breadcrumb,
+  .crumb,
+  .metric-box,
+  .invite-code-box,
+  .invite-result-box,
+  .create-result-panel,
+  .empty-card,
+  .dialog-panel,
+  .dialog-summary,
+  .summary-chip {
+    background: var(--tt-surface) !important;
+    border-color: var(--tt-border-subtle) !important;
+    color: var(--tt-text) !important;
+  }
+
+  .context-item,
+  .context-summary-item,
+  .score-item,
+  .formula-panel,
+  .pool-card,
+  .my-task-card,
+  .bento-surface,
+  .batch-row,
+  .progress-hero,
+  .member-progress-strip,
+  .member-progress-card,
+  .submit-panel,
+  .reviews-panel,
+  .review-row,
+  .member-option,
+  .type-option,
+  .urgent-card,
+  .task-desc-panel,
+  .support-panel {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border-subtle) !important;
+    color: var(--tt-text) !important;
+  }
+
+  .filter-panel,
+  .topbar {
+    background: var(--tt-surface) !important;
+    border: 1px solid var(--tt-border-subtle) !important;
+    color: var(--tt-text) !important;
+  }
+
+  .scope-tab.active,
+  .toggle-btn.active,
+  .settings-tab.active {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    color: var(--tt-accent) !important;
+  }
+
+  .toggle-btn,
+  .scope-tab,
+  .settings-tab {
+    color: var(--tt-text-secondary) !important;
+  }
+
+  .queue-panel {
+    border-right-color: var(--tt-border) !important;
+  }
+
+  .member-row,
+  .group-card {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border-strong) !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .group-card:hover {
+    border-color: var(--tt-accent-border) !important;
+    background: var(--tt-surface-hover) !important;
+  }
+
+  .group-card.active {
+    border-color: var(--tt-accent) !important;
+    background: var(--tt-accent-soft) !important;
+    box-shadow: 0 0 0 1px var(--tt-accent-border) !important;
+  }
+
+  .member-row {
+    background: var(--tt-surface) !important;
+  }
+  .notice-item,
+  .log-row,
+  .security-row,
+  .delete-confirm,
+  .message,
+  .fact-card,
+  .option-btn,
+  .setting-row,
+  .setting-control {
+    background: var(--tt-surface) !important;
+    border-color: var(--tt-border-subtle) !important;
+    color: var(--tt-text) !important;
+  }
+
+  /* Fix text colors in dark mode */
+  h1, h2, h3, h4, h5, h6,
+  .title, .label, .name, .heading {
+    color: var(--tt-text) !important;
+  }
+
+  p, span, div, td, th, li, a, strong, em {
+    color: inherit;
+  }
+
+  /* Fix input backgrounds */
+  input, textarea, select {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text) !important;
+  }
+
+  /* Fix button backgrounds */
+  .secondary-btn, .outline-btn, .ghost-btn, .back-btn, .toggle-btn {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text) !important;
+  }
+
+  .mini-btn {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .mini-btn:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--tt-accent) 18%, var(--tt-surface)) !important;
+    border-color: var(--tt-accent) !important;
+    color: var(--tt-text) !important;
+  }
+
+  .text-btn {
+    background: transparent !important;
+    color: var(--tt-text-secondary) !important;
+  }
+
+  .text-btn.danger {
+    color: var(--tt-danger) !important;
+  }
+
+  .primary-btn,
+  .action-btn,
+  .toolbar-create-btn,
+  .tab-btn.active {
+    background: var(--tt-accent) !important;
+    border-color: var(--tt-accent) !important;
+    color: #ffffff !important;
+  }
+
+  .notice-item.unread {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+  }
+
+  .desc, .label, .meta, .empty, .eyebrow, p.tag, .hint, .subtle,
+  .page-note, .class-meta, .metric-label, .summary-label, .summary-note {
+    color: var(--tt-text-secondary) !important;
+  }
+
+  .class-name,
+  .metric-value,
+  .summary-value,
+  .summary-name,
+  .title-block h2 {
+    color: var(--tt-text) !important;
+  }
+
+  /* Fix table backgrounds */
+  table, thead, tbody, tr, td, th {
+    background: transparent !important;
+    color: var(--tt-text) !important;
+    border-color: var(--tt-border) !important;
+  }
+
+  /* Fix gradient backgrounds */
+  .greeting-bar,
+  .welcome-section,
+  .hero-section {
+    background: var(--tt-surface) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   Student-page glass & dynamic effects (restored)
+   ═══════════════════════════════════════════════ */
+
+.student-page .topbar,
+.student-page .table-panel,
+.student-page .score-panel,
+.student-page .profile-header,
+.student-page .action-panel,
+.student-page .hero,
+.student-page .panel,
+.student-page .stat-card,
+.student-page .context-panel,
+.student-page .info-header,
+.student-page .detail-panel {
+  position: relative;
+  background: var(--tt-surface);
+  border: 1px solid var(--tt-border-subtle);
+  border-radius: 24px;
+  box-shadow: var(--tt-shadow-sm);
+  overflow: hidden;
+  transition:
+    transform 180ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 180ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    border-color 180ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.student-page .stat-card:nth-child(2) {
+  background: var(--tt-surface);
+}
+
+.student-page .stat-card:nth-child(3) {
+  background: var(--tt-surface);
+}
+
+.student-page .stat-card:nth-child(4) {
+  background: var(--tt-surface);
+}
+
+.student-page .table-panel:hover,
+.student-page .score-panel:hover,
+.student-page .profile-header:hover,
+.student-page .action-panel:hover,
+.student-page .hero:hover,
+.student-page .panel:hover,
+.student-page .stat-card:hover,
+.student-page .context-panel:hover,
+.student-page .info-header:hover,
+.student-page .detail-panel:hover {
+  transform: translateY(-4px);
+  border-color: var(--tt-accent-border);
+  box-shadow: var(--tt-shadow-md);
+}

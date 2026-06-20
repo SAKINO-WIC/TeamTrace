@@ -1,0 +1,173 @@
+/**
+ * 学生端页面通用表面 — 覆盖各 view scoped 中的硬编码白底，亮/暗主题统一走 --tt-* token
+ */
+
+.student-page .card,
+.student-page .kpi-card,
+.student-page .summary-chip,
+.student-page .error-card,
+.student-page .task-card,
+.student-page .summary-card,
+.student-page .appeal-row,
+.student-page .tab-btn,
+.student-page .empty-card,
+.student-page .empty-state,
+.student-page .error-state,
+.student-page .greeting-bar,
+.student-page .urgent-card,
+.student-page .filter-panel,
+.student-page .task-row,
+.student-page .notification-row,
+.student-page .detail-block,
+.student-page .detail-grid > div,
+.student-page .detail-grid div,
+.student-page .message,
+.student-page .bento-surface,
+.student-page .info-card,
+.student-page .skeleton-card,
+.student-page .skeleton-row,
+.student-page .queue-item,
+.student-page .metric-card,
+.student-page .profile-card,
+.student-page .log-row {
+  background: var(--student-tile-bg, var(--tt-surface)) !important;
+  border-color: var(--tt-border-subtle) !important;
+  color: var(--tt-text);
+  box-shadow: var(--tt-shadow-xs);
+}
+
+.student-page .metric-box:not(.class-card .metric-box) {
+  background: var(--student-surface-inset, var(--tt-surface-muted)) !important;
+  border-color: var(--student-surface-inset-border, var(--tt-border-subtle)) !important;
+}
+
+.student-page .class-card {
+  border-color: color-mix(in srgb, var(--tt-accent) 10%, var(--tt-border-subtle)) !important;
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--tt-accent) 4%, transparent) !important;
+}
+
+.student-page .class-card.active {
+  background: var(--student-class-card-active-bg, var(--student-tile-bg)) !important;
+  border-color: color-mix(in srgb, var(--tt-accent) 18%, var(--tt-border-subtle)) !important;
+}
+
+.student-page .class-card.ended {
+  background: var(--student-class-card-ended-bg, var(--student-tile-bg)) !important;
+  border-color: var(--tt-border-subtle) !important;
+  box-shadow: var(--tt-shadow-xs) !important;
+}
+
+.student-page .class-card .metric-box,
+.student-page .class-card .metric-box--teacher,
+.student-page .class-card .metric-box--group,
+.student-page .class-card .metric-box--tasks {
+  background: var(--student-class-metric-tasks-bg, color-mix(in srgb, var(--tt-accent) 5%, #f8fbff)) !important;
+  border-color: var(--student-class-metric-tasks-border, color-mix(in srgb, var(--tt-accent) 11%, #eaf1fa)) !important;
+}
+
+.student-page .class-card .metric-box--code {
+  background: var(--student-class-metric-code-bg, color-mix(in srgb, var(--tt-accent) 11%, #ffffff)) !important;
+  border-color: var(--student-class-metric-code-border, color-mix(in srgb, var(--tt-accent) 18%, #e3ebf7)) !important;
+}
+
+.student-page .class-card .metric-box--teacher {
+  background: var(--student-class-metric-teacher-bg, color-mix(in srgb, var(--tt-accent) 7%, #ffffff)) !important;
+  border-color: var(--student-class-metric-teacher-border, color-mix(in srgb, var(--tt-accent) 13%, #e8eef6)) !important;
+}
+
+.student-page .class-card .metric-box--group {
+  background: var(--student-class-metric-group-bg, color-mix(in srgb, #38bdf8 8%, #ffffff)) !important;
+  border-color: var(--student-class-metric-group-border, color-mix(in srgb, #38bdf8 14%, #e6f3fc)) !important;
+}
+
+.student-page .class-card .metric-label {
+  color: var(--tt-text-secondary) !important;
+}
+
+.student-page .class-card .metric-value {
+  color: var(--tt-text) !important;
+}
+
+.student-page .summary-chip.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+}
+
+.student-page .class-name,
+.student-page .metric-value {
+  color: var(--tt-text) !important;
+}
+
+.student-page .appeal-row.active,
+.student-page .task-row.active,
+.student-page .notification-row.active,
+.student-page .tab-btn.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+.student-page .tab-btn {
+  color: var(--tt-text-secondary);
+}
+
+.student-page .tab-btn.active {
+  color: var(--tt-accent);
+}
+
+.student-page h1,
+.student-page h2,
+.student-page h3,
+.student-page .kpi-value,
+.student-page .summary-card strong,
+.student-page .tab-btn strong,
+.student-page .appeal-row strong,
+.student-page .task-row strong,
+.student-page .class-card-title,
+.student-page .greeting-text,
+.student-page .empty-heading {
+  color: var(--tt-text) !important;
+}
+
+.student-page .hero-note,
+.student-page .summary-card span,
+.student-page .kpi-label,
+.student-page .row-meta,
+.student-page .row-time,
+.student-page .greeting-sub,
+.student-page .section-count,
+.student-page .field-hint,
+.student-page dt {
+  color: var(--tt-text-secondary) !important;
+}
+
+.student-page .detail-block p,
+.student-page dd {
+  color: var(--tt-text);
+}
+
+.student-page .primary-btn {
+  background: var(--tt-accent) !important;
+  color: var(--tt-text-inverse) !important;
+  border-color: transparent !important;
+}
+
+.student-page .secondary-btn {
+  background: var(--student-surface-inset, var(--tt-surface-muted)) !important;
+  color: var(--tt-text) !important;
+  border: 1px solid var(--student-surface-inset-border, var(--tt-border)) !important;
+}
+
+.student-page input,
+.student-page select,
+.student-page textarea,
+.student-page .join-input {
+  background: var(--tt-surface) !important;
+  border: 1px solid var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+.student-page input::placeholder,
+.student-page textarea::placeholder {
+  color: var(--tt-text-tertiary);
+}

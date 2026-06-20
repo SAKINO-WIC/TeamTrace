@@ -1,0 +1,119 @@
+/* Admin theme — delegates to unified --tt-* tokens */
+:root:not([data-teacher-theme='midnight-classroom']):not([data-student-theme='dark']),
+[data-admin-theme='apple-graphite'] {
+  --admin-bg-start: oklch(0.985 0.018 218);
+  --admin-bg-end: oklch(0.965 0.042 78);
+  --admin-surface: oklch(0.99 0.014 220 / 0.82);
+  --admin-surface-muted: oklch(0.965 0.026 214 / 0.78);
+  --admin-content-surface: oklch(0.99 0.014 220 / 0.82);
+  --admin-content-surface-strong: oklch(0.995 0.01 225 / 0.9);
+  --admin-shell-bg: oklch(0.99 0.016 220 / 0.78);
+  --admin-shell-border: oklch(0.76 0.045 224 / 0.5);
+  --admin-border: oklch(0.76 0.045 224 / 0.44);
+  --admin-border-strong: oklch(0.68 0.065 228 / 0.52);
+  --admin-shadow: 0 24px 68px oklch(0.5 0.09 230 / 0.15);
+  --admin-soft-shadow: 0 12px 34px oklch(0.5 0.08 230 / 0.1);
+  --admin-shell-shadow: 0 28px 76px oklch(0.5 0.09 230 / 0.16);
+  --admin-hover-shadow: 0 30px 86px oklch(0.5 0.1 230 / 0.2);
+
+  --admin-text-primary: oklch(0.22 0.06 248);
+  --admin-text-secondary: oklch(0.42 0.045 246);
+  --admin-text-tertiary: oklch(0.56 0.038 242);
+  --admin-text-quaternary: oklch(0.64 0.032 238);
+
+  --admin-radius-card: 22px;
+  --admin-radius-panel: 30px;
+  --admin-radius-control: 16px;
+  --admin-radius-pill: var(--tt-radius-full);
+
+  --admin-accent: oklch(0.64 0.18 235);
+  --admin-accent-soft: oklch(0.87 0.08 202 / 0.42);
+  --admin-accent-border: oklch(0.7 0.12 220 / 0.32);
+  --admin-btn-primary-bg: linear-gradient(135deg, oklch(0.67 0.18 235), oklch(0.73 0.14 208));
+  --admin-btn-primary-text: oklch(0.99 0.006 230);
+  --admin-btn-secondary-bg: oklch(0.98 0.026 82 / 0.78);
+  --admin-btn-secondary-text: oklch(0.3 0.08 250);
+  --admin-btn-ghost-bg: transparent;
+
+  --admin-success: oklch(0.58 0.14 158);
+  --admin-success-soft: oklch(0.9 0.08 160 / 0.36);
+  --admin-warning: oklch(0.68 0.15 72);
+  --admin-warning-soft: oklch(0.92 0.08 80 / 0.4);
+  --admin-danger: oklch(0.58 0.2 29);
+  --admin-danger-soft: oklch(0.9 0.07 30 / 0.36);
+  --admin-neutral-strong: oklch(0.42 0.045 246);
+  --admin-neutral-soft: oklch(0.94 0.022 230 / 0.72);
+
+  --admin-table-divider: oklch(0.78 0.035 224 / 0.36);
+  --admin-input-bg: oklch(0.995 0.008 226 / 0.86);
+  --admin-input-border: oklch(0.76 0.045 224 / 0.5);
+}
+
+[data-admin-theme='apple-blue'] {
+  --admin-btn-primary-bg: var(--tt-accent);
+  --admin-btn-secondary-bg: var(--tt-accent-soft);
+  --admin-btn-secondary-text: var(--tt-accent);
+}
+
+[data-admin-theme='midnight-console'] {
+  color-scheme: dark;
+
+  --tt-bg: #0a0a0a;
+  --tt-bg-elevated: #141414;
+  --tt-bg-sunken: #0f0f0f;
+  --tt-bg-overlay: rgba(20, 20, 20, 0.9);
+  --tt-surface: #1a1a1a;
+  --tt-surface-hover: #222222;
+  --tt-surface-active: #2a2a2a;
+  --tt-surface-muted: #1e1e1e;
+  --tt-border: #2e2e2e;
+  --tt-border-subtle: #222222;
+  --tt-border-strong: #3a3a3a;
+  --tt-divider: #222222;
+  --tt-text: #f5f5f5;
+  --tt-text-secondary: #a0a0a0;
+  --tt-text-tertiary: #666666;
+  --tt-text-inverse: #ffffff;
+  --tt-accent: #3b82f6;
+  --tt-accent-secondary: #60a5fa;
+  --tt-accent-hover: #60a5fa;
+  --tt-accent-soft: rgba(59, 130, 246, 0.12);
+  --tt-accent-border: rgba(59, 130, 246, 0.2);
+  --tt-success: #22c55e;
+  --tt-success-soft: rgba(34, 197, 94, 0.12);
+  --tt-warning: #f59e0b;
+  --tt-warning-soft: rgba(234, 179, 8, 0.12);
+  --tt-danger: #ef4444;
+  --tt-danger-soft: rgba(239, 68, 68, 0.1);
+  --tt-input-bg: #282828;
+  --tt-input-border: #484848;
+  --tt-input-border-hover: #5c5c5c;
+  --tt-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --tt-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --tt-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --tt-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --tt-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.4);
+
+  --admin-bg-start: var(--tt-bg);
+  --admin-bg-end: var(--tt-bg-sunken);
+  --admin-surface: var(--tt-surface);
+  --admin-surface-muted: var(--tt-surface-muted);
+  --admin-content-surface: var(--tt-surface);
+  --admin-content-surface-strong: var(--tt-bg-elevated);
+  --admin-shell-bg: #111111;
+  --admin-shell-border: var(--tt-border);
+  --admin-border: var(--tt-border);
+  --admin-border-strong: var(--tt-border-strong);
+  --admin-text-primary: var(--tt-text);
+  --admin-text-secondary: var(--tt-text-secondary);
+  --admin-text-tertiary: var(--tt-text-tertiary);
+  --admin-input-bg: var(--tt-input-bg);
+  --admin-input-border: var(--tt-input-border);
+}
+
+html[data-admin-theme='midnight-console'],
+html[data-admin-theme='midnight-console'] body,
+html[data-admin-theme='midnight-console'] #app {
+  background: var(--tt-bg);
+  color: var(--tt-text);
+}

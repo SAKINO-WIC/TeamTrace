@@ -1,0 +1,261 @@
+/* Teacher theme — delegates to unified --tt-* tokens */
+:root:not([data-teacher-theme='midnight-classroom']):not([data-student-theme='dark']),
+[data-teacher-theme='apple-graphite'],
+[data-student-theme='light'] {
+  color-scheme: light;
+
+  /* Lock light tokens so OS dark mode cannot bleed through */
+  --tt-bg: #fafafa;
+  --tt-bg-elevated: #ffffff;
+  --tt-bg-sunken: #f5f5f5;
+  --tt-bg-overlay: rgba(255, 255, 255, 0.85);
+  --tt-surface-glass: rgba(255, 255, 255, 0.78);
+  --tt-surface-glass-strong: rgba(255, 255, 255, 0.9);
+  --tt-bg-glow: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
+  --tt-surface: #ffffff;
+  --tt-surface-hover: #f9fafb;
+  --tt-surface-active: #f3f4f6;
+  --tt-surface-muted: #f5f5f5;
+  --tt-border: #e5e7eb;
+  --tt-border-subtle: #f0f0f0;
+  --tt-border-strong: #d1d5db;
+  --tt-divider: #f0f0f0;
+  --tt-text: #111827;
+  --tt-text-secondary: #6b7280;
+  --tt-text-tertiary: #9ca3af;
+  --tt-text-inverse: #ffffff;
+
+  --teacher-bg: var(--tt-bg);
+  --teacher-surface: var(--tt-surface);
+  --teacher-surface-muted: var(--tt-surface-muted);
+  --teacher-border: var(--tt-border);
+  --teacher-divider: var(--tt-divider);
+  --teacher-shadow: var(--tt-shadow-sm);
+  --teacher-shadow-hover: var(--tt-shadow-md);
+
+  --teacher-text-primary: var(--tt-text);
+  --teacher-text-secondary: var(--tt-text-secondary);
+  --teacher-text-tertiary: var(--tt-text-tertiary);
+
+  --teacher-accent: var(--tt-accent);
+  --teacher-accent-strong: var(--tt-accent-hover);
+  --teacher-accent-secondary: var(--tt-accent-secondary);
+  --teacher-accent-soft: var(--tt-accent-soft);
+  --teacher-accent-gradient: var(--tt-accent-gradient);
+  --teacher-accent-shadow: var(--tt-shadow-accent);
+  --teacher-success: var(--tt-success);
+  --teacher-danger: var(--tt-danger);
+  --teacher-danger-soft: var(--tt-danger-soft);
+  --teacher-sidebar-bg: var(--tt-bg-elevated);
+  --teacher-header-bg: var(--tt-bg-overlay);
+
+  --teacher-radius-card: var(--tt-radius-lg);
+  --teacher-radius-control: var(--tt-radius-md);
+  --teacher-ease: var(--tt-ease);
+  --teacher-ease-ios: var(--tt-ease-ios);
+  --teacher-duration-fast: var(--tt-duration-fast);
+  --teacher-content-max-width: var(--tt-content-max-width);
+  --teacher-page-padding: var(--tt-page-padding);
+}
+
+[data-teacher-theme='midnight-classroom'] {
+  color-scheme: dark;
+  --tt-bg: #0a0a0a;
+  --tt-bg-elevated: #141414;
+  --tt-bg-sunken: #0f0f0f;
+  --tt-bg-overlay: rgba(20, 20, 20, 0.9);
+  --tt-surface-glass: rgba(20, 20, 20, 0.76);
+  --tt-surface-glass-strong: rgba(26, 26, 26, 0.9);
+  --tt-bg-glow:
+    radial-gradient(circle at 10% 0%, rgba(59, 130, 246, 0.14), transparent 32%),
+    radial-gradient(circle at 90% 10%, rgba(96, 165, 250, 0.1), transparent 30%),
+    linear-gradient(180deg, #0a0a0a 0%, #0f172a 100%);
+  --tt-surface: #1a1a1a;
+  --tt-surface-hover: #242424;
+  --tt-surface-active: #2e2e2e;
+  --tt-surface-muted: #222222;
+  --tt-border: rgba(255, 255, 255, 0.14);
+  --tt-border-subtle: rgba(255, 255, 255, 0.1);
+  --tt-border-strong: rgba(255, 255, 255, 0.22);
+  --tt-divider: rgba(255, 255, 255, 0.1);
+  --tt-text: #f5f5f5;
+  --tt-text-secondary: #a0a0a0;
+  --tt-text-tertiary: #666666;
+  --tt-text-inverse: #ffffff;
+  --tt-accent: #3b82f6;
+  --tt-accent-secondary: #60a5fa;
+  --tt-accent-hover: #60a5fa;
+  --tt-accent-soft: rgba(59, 130, 246, 0.12);
+  --tt-accent-border: rgba(59, 130, 246, 0.2);
+  --tt-accent-gradient: linear-gradient(135deg, #3b82f6, #60a5fa);
+  --tt-accent-gradient-live: linear-gradient(120deg, #3b82f6 0%, #60a5fa 48%, #38bdf8 100%);
+  --tt-success: #22c55e;
+  --tt-success-soft: rgba(34, 197, 94, 0.12);
+  --tt-warning: #f59e0b;
+  --tt-warning-soft: rgba(234, 179, 8, 0.12);
+  --tt-danger: #ef4444;
+  --tt-danger-soft: rgba(239, 68, 68, 0.1);
+  --tt-shadow-accent: 0 10px 24px rgba(59, 130, 246, 0.22);
+  --tt-shadow-accent-lg: 0 18px 42px rgba(59, 130, 246, 0.28);
+  --tt-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --tt-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --tt-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --tt-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --tt-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.4);
+
+  /* Teacher-specific overrides */
+  --teacher-bg: #0a0a0a;
+  --teacher-surface: #1a1a1a;
+  --teacher-surface-muted: #1e1e1e;
+  --teacher-border: var(--tt-border);
+  --teacher-divider: var(--tt-divider);
+  --teacher-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
+  --teacher-shadow-hover: 0 24px 48px rgba(0, 0, 0, 0.4);
+  --teacher-text-primary: #f5f5f5;
+  --teacher-text-secondary: #a0a0a0;
+  --teacher-text-tertiary: #666666;
+  --teacher-accent: #3b82f6;
+  --teacher-accent-strong: #60a5fa;
+  --teacher-accent-secondary: #60a5fa;
+  --teacher-accent-soft: rgba(59, 130, 246, 0.12);
+  --teacher-accent-gradient: linear-gradient(135deg, #3b82f6, #60a5fa);
+  --teacher-accent-shadow: 0 18px 42px rgba(59, 130, 246, 0.28);
+  --teacher-success: #22c55e;
+  --teacher-danger: #ef4444;
+  --teacher-danger-soft: rgba(239, 68, 68, 0.1);
+  --teacher-sidebar-bg: #111111;
+  --teacher-header-bg: rgba(10, 10, 10, 0.9);
+}
+
+html[data-teacher-theme='midnight-classroom'],
+html[data-teacher-theme='midnight-classroom'] body,
+html[data-teacher-theme='midnight-classroom'] #app {
+  background: var(--tt-bg);
+  color: var(--tt-text);
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-layout,
+html[data-teacher-theme='midnight-classroom'] .teacher-main {
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.08), transparent 32%),
+    radial-gradient(circle at 88% 14%, rgba(96, 165, 250, 0.06), transparent 30%),
+    linear-gradient(180deg, var(--tt-bg) 0%, var(--tt-bg-sunken) 100%);
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-layout::before {
+  opacity: 0.35;
+}
+
+/* 暗色下卡片/面板描边，避免仅靠阴影与背景融为一体 */
+html[data-teacher-theme='midnight-classroom'] .card {
+  border: 1px solid var(--tt-border);
+  box-shadow: var(--tt-shadow-sm);
+}
+
+.teacher-page {
+  max-width: var(--teacher-content-max-width);
+  margin: 0 auto;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.teacher-page-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 4px;
+}
+
+/* 内层可滚动区域：滚到顶/底后继续带动外层滚动 */
+.teacher-scroll-chain {
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 列表最多展示 7 条，超出内部滚动；滚到顶/底后继续带动外层滚动 */
+.teacher-list-scroll-7 {
+  --teacher-list-row-height: 52px;
+  --teacher-list-row-gap: 8px;
+  --teacher-list-visible-rows: 7;
+  max-height: calc(
+    var(--teacher-list-visible-rows) * var(--teacher-list-row-height) +
+      (var(--teacher-list-visible-rows) - 1) * var(--teacher-list-row-gap)
+  );
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.teacher-list-scroll-7.tall-rows {
+  --teacher-list-row-height: 92px;
+}
+
+.teacher-list-scroll-7.compact-subtask {
+  --teacher-list-row-height: 64px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--tt-space-3);
+  margin-bottom: var(--tt-space-5);
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tt-space-2);
+  margin-bottom: var(--tt-space-5);
+}
+
+.page-content {
+  display: grid;
+  gap: var(--tt-space-5);
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--tt-space-4);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--tt-space-4);
+}
+
+.data-table-wrapper {
+  background: var(--tt-surface);
+  border: 1px solid var(--tt-border);
+  border-radius: var(--tt-radius-lg);
+  overflow: auto;
+}
+
+@media (max-width: 1200px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .kpi-grid,
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,454 @@
+:root {
+  --teacher-dialog-inset-left: 0px;
+  --teacher-dialog-inset-right: 0px;
+  --student-dialog-inset-left: 0px;
+  --student-dialog-inset-right: 0px;
+  --workspace-dialog-inset-left: var(--teacher-dialog-inset-left);
+  --workspace-dialog-inset-right: var(--teacher-dialog-inset-right);
+  /* Avoid 100vw scrollbar overflow on Windows (differs from overlay scrollbars on macOS). */
+  --tt-dialog-available-width: 100%;
+}
+
+.dialog-mask,
+.settings-overlay,
+.confirm-overlay,
+.pw-overlay,
+.peer-modal-backdrop,
+.dialog-overlay,
+.score-grading-overlay {
+  position: fixed;
+  top: 0;
+  right: var(--teacher-dialog-inset-right, 0);
+  bottom: 0;
+  left: var(--teacher-dialog-inset-left, 0);
+  box-sizing: border-box;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.42);
+  /* Avoid backdrop-filter: opening many modals on Windows is noticeably slower. */
+  overscroll-behavior: contain;
+}
+
+html[data-student-theme] .dialog-mask,
+html[data-student-theme] .settings-overlay,
+html[data-student-theme] .confirm-overlay,
+html[data-student-theme] .pw-overlay,
+html[data-student-theme] .peer-modal-backdrop,
+html[data-student-theme] .dialog-overlay,
+html[data-student-theme] .score-grading-overlay {
+  left: var(--student-dialog-inset-left, 0);
+  right: var(--student-dialog-inset-right, 0);
+}
+
+.dialog-mask > *,
+.settings-overlay > *,
+.confirm-overlay > *,
+.pw-overlay > *,
+.peer-modal-backdrop > *,
+.dialog-overlay > *,
+.score-grading-overlay > * {
+  max-height: min(88vh, 820px);
+  overflow: auto;
+}
+
+.dialog-grid {
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.dialog-grid input:focus,
+.dialog-grid input:focus-visible,
+.dialog-grid select:focus,
+.dialog-grid select:focus-visible,
+.dialog-grid textarea:focus,
+.dialog-grid textarea:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--tt-accent) 40%, var(--tt-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tt-accent) 14%, transparent);
+}
+
+@media (max-width: 1120px) {
+  .dialog-mask,
+  .settings-overlay,
+  .confirm-overlay,
+  .pw-overlay,
+  .peer-modal-backdrop,
+  .dialog-overlay,
+  .score-grading-overlay {
+    left: 0;
+    right: 0;
+  }
+
+  html[data-student-theme] .dialog-mask,
+  html[data-student-theme] .settings-overlay,
+  html[data-student-theme] .confirm-overlay,
+  html[data-student-theme] .pw-overlay,
+  html[data-student-theme] .peer-modal-backdrop,
+  html[data-student-theme] .dialog-overlay,
+  html[data-student-theme] .score-grading-overlay {
+    left: 0;
+    right: 0;
+  }
+}
+
+/* ── Dark theme: teacher modals / dialogs ── */
+html[data-teacher-theme='midnight-classroom'] .dialog-mask,
+html[data-teacher-theme='midnight-classroom'] .dialog-overlay,
+html[data-teacher-theme='midnight-classroom'] .score-grading-overlay,
+html[data-teacher-theme='midnight-classroom'] .settings-overlay,
+html[data-teacher-theme='midnight-classroom'] .confirm-overlay {
+  background: rgba(0, 0, 0, 0.58) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-panel,
+html[data-teacher-theme='midnight-classroom'] .dialog-panel.card,
+html[data-teacher-theme='midnight-classroom'] .detail-dialog,
+html[data-teacher-theme='midnight-classroom'] .danger-dialog,
+html[data-teacher-theme='midnight-classroom'] .manage-dialog,
+html[data-teacher-theme='midnight-classroom'] .compact-dialog,
+html[data-teacher-theme='midnight-classroom'] .confirm-panel,
+html[data-teacher-theme='midnight-classroom'] .settings-panel,
+html[data-teacher-theme='midnight-classroom'] .score-modal {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+  box-shadow: var(--tt-shadow-xl) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-head,
+html[data-teacher-theme='midnight-classroom'] .score-modal-head {
+  background: linear-gradient(
+    180deg,
+    var(--tt-surface-muted),
+    var(--tt-surface)
+  ) !important;
+  border-bottom-color: var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-head h2,
+html[data-teacher-theme='midnight-classroom'] .dialog-head h3,
+html[data-teacher-theme='midnight-classroom'] .score-modal-head h3,
+html[data-teacher-theme='midnight-classroom'] .head-eyebrow,
+html[data-teacher-theme='midnight-classroom'] .dialog-eyebrow {
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .head-eyebrow,
+html[data-teacher-theme='midnight-classroom'] .dialog-eyebrow {
+  color: var(--tt-accent-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-grid,
+html[data-teacher-theme='midnight-classroom'] .dialog-body,
+html[data-teacher-theme='midnight-classroom'] .manage-body,
+html[data-teacher-theme='midnight-classroom'] .score-modal-body {
+  background: var(--tt-surface) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-actions,
+html[data-teacher-theme='midnight-classroom'] .manage-dialog-actions,
+html[data-teacher-theme='midnight-classroom'] .score-modal-foot {
+  background: var(--tt-surface-muted) !important;
+  border-top-color: var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-grid label span,
+html[data-teacher-theme='midnight-classroom'] .form-note,
+html[data-teacher-theme='midnight-classroom'] .summary-note {
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-grid input,
+html[data-teacher-theme='midnight-classroom'] .dialog-grid select,
+html[data-teacher-theme='midnight-classroom'] .manage-input {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-summary,
+html[data-teacher-theme='midnight-classroom'] .detail-item,
+html[data-teacher-theme='midnight-classroom'] .info-card,
+html[data-teacher-theme='midnight-classroom'] .note-card,
+html[data-teacher-theme='midnight-classroom'] .placeholder-box {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .file-item {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .file-info strong,
+html[data-teacher-theme='midnight-classroom'] .summary-name,
+html[data-teacher-theme='midnight-classroom'] .status-copy strong {
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .meta-name,
+html[data-teacher-theme='midnight-classroom'] .status-copy span,
+html[data-teacher-theme='midnight-classroom'] .file-info span,
+html[data-teacher-theme='midnight-classroom'] .placeholder-text {
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .meta-tag,
+html[data-teacher-theme='midnight-classroom'] .file-count {
+  background: var(--tt-accent-soft) !important;
+  color: var(--tt-accent) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .head-close {
+  background: var(--tt-surface-hover) !important;
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .head-close:hover {
+  background: var(--tt-accent-soft) !important;
+  color: var(--tt-accent) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .score-input-wrap {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .score-input-wrap input {
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .btn-ghost,
+html[data-teacher-theme='midnight-classroom'] .confirm-btn:not(.danger) {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .btn-ghost:hover,
+html[data-teacher-theme='midnight-classroom'] .confirm-btn:not(.danger):hover {
+  background: var(--tt-surface-hover) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .preview-bar {
+  background: var(--tt-surface-muted) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .preview-frame,
+html[data-teacher-theme='midnight-classroom'] .preview-image {
+  background: var(--tt-bg-sunken) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .icon-close-btn {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text-secondary) !important;
+}
+
+/* Element Plus dialogs */
+html[data-teacher-theme='midnight-classroom'] .el-dialog,
+html.dark[data-teacher-theme='midnight-classroom'] .el-dialog {
+  --el-dialog-bg-color: var(--tt-surface);
+  --el-text-color-primary: var(--tt-text);
+  --el-text-color-regular: var(--tt-text-secondary);
+  background: var(--tt-surface) !important;
+  border: 1px solid var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .el-dialog__header {
+  background: var(--tt-surface-muted) !important;
+  border-bottom: 1px solid var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .el-dialog__title {
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .el-dialog__body {
+  background: var(--tt-surface) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .el-dialog__footer {
+  background: var(--tt-surface-muted) !important;
+  border-top: 1px solid var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .peer-modal,
+html[data-teacher-theme='midnight-classroom'] .pw-panel {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .peer-modal-block {
+  background: var(--tt-surface-muted) !important;
+  border: 1px solid var(--tt-border-subtle) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .pw-header {
+  background: var(--tt-surface-muted) !important;
+  border-bottom: 1px solid var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .pw-body {
+  background: var(--tt-surface) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .pw-input,
+html[data-teacher-theme='midnight-classroom'] .pw-btn:not(.primary) {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .score-label,
+html[data-teacher-theme='midnight-classroom'] .score-hint,
+html[data-teacher-theme='midnight-classroom'] .score-suffix {
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .danger-banner {
+  background: var(--tt-danger-soft) !important;
+  border-color: rgba(239, 68, 68, 0.28) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .danger-banner-title {
+  color: var(--tt-danger) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .detail-dialog-actions {
+  border-top-color: var(--tt-border-subtle) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .dialog-panel .secondary-btn,
+html[data-teacher-theme='midnight-classroom'] .detail-dialog .secondary-btn,
+html[data-teacher-theme='midnight-classroom'] .danger-dialog .secondary-btn,
+html[data-teacher-theme='midnight-classroom'] .manage-dialog .secondary-btn,
+html[data-teacher-theme='midnight-classroom'] .dialog-actions .secondary-btn {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .detail-dialog .ghost-btn,
+html[data-teacher-theme='midnight-classroom'] .danger-dialog .ghost-btn,
+html[data-teacher-theme='midnight-classroom'] .manage-dialog .ghost-btn {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .manage-dialog .danger-ghost-btn,
+html[data-teacher-theme='midnight-classroom'] .danger-dialog .danger-link-btn {
+  background: var(--tt-danger-soft) !important;
+  border-color: rgba(239, 68, 68, 0.28) !important;
+  color: var(--tt-danger) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .manage-dialog,
+html[data-teacher-theme='midnight-classroom'] .manage-section,
+html[data-teacher-theme='midnight-classroom'] .manage-dialog-actions {
+  border-color: var(--tt-border-subtle) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .manage-input {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .manage-section-title {
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .manage-section-desc {
+  color: var(--tt-text-tertiary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .el-dialog__headerbtn .el-dialog__close {
+  color: var(--tt-text-secondary) !important;
+}
+
+/* ── Dark theme: student modals / dialogs ── */
+html[data-student-theme='dark'] .dialog-mask,
+html[data-student-theme='dark'] .dialog-overlay,
+html[data-student-theme='dark'] .settings-overlay,
+html[data-student-theme='dark'] .confirm-overlay,
+html[data-student-theme='dark'] .pw-overlay {
+  background: rgba(0, 0, 0, 0.58) !important;
+}
+
+html[data-student-theme='dark'] .settings-panel,
+html[data-student-theme='dark'] .confirm-panel,
+html[data-student-theme='dark'] .dialog-panel,
+html[data-student-theme='dark'] .pw-panel {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+  box-shadow: var(--tt-shadow-xl) !important;
+}
+
+html[data-student-theme='dark'] .setting-row,
+html[data-student-theme='dark'] .account-card {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+html[data-student-theme='dark'] .settings-tab.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+}
+
+html[data-student-theme='dark'] .confirm-btn:not(.danger) {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+/* ── Dark theme: admin modals / dialogs ── */
+html[data-admin-theme='midnight-console'] .dialog-mask,
+html[data-admin-theme='midnight-console'] .dialog-overlay,
+html[data-admin-theme='midnight-console'] .settings-overlay,
+html[data-admin-theme='midnight-console'] .confirm-overlay,
+html[data-admin-theme='midnight-console'] .pw-overlay {
+  background: rgba(0, 0, 0, 0.58) !important;
+}
+
+html[data-admin-theme='midnight-console'] .settings-panel,
+html[data-admin-theme='midnight-console'] .confirm-panel,
+html[data-admin-theme='midnight-console'] .dialog-panel,
+html[data-admin-theme='midnight-console'] .pw-panel {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+  box-shadow: var(--tt-shadow-xl) !important;
+}
+
+html[data-admin-theme='midnight-console'] .setting-row,
+html[data-admin-theme='midnight-console'] .account-card {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+html[data-admin-theme='midnight-console'] .settings-tab.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+}
+
+html[data-admin-theme='midnight-console'] .confirm-btn:not(.danger) {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}

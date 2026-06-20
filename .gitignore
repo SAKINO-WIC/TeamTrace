@@ -1,0 +1,50 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Secrets
+.env
+.env.*
+!.env.example
+!.env.local.example
+!.env.sealos.example
+!.env.cloud.example
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/coverage/
+frontend/.vite/
+frontend/*.log
+
+# Backend
+backend/target/
+backend/logs/
+backend/uploads/
+backend/tmp_upload/
+backend/*.log
+backend/*.pid
+
+# Archives / backups / local runtime
+backups/
+devbox-backups/
+*.bak
+*.bak-*
+*.bundle
+*.zip
+*.tar
+*.tar.gz
+*.sql
+*.sql.gz
+
+# AI / agent scratch files
+.codex*/
+.claude*/
+.remote-work/
+.runtime-logs/
+tmp-prod-check/

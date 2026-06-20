@@ -1,0 +1,142 @@
+/**
+ * 全站空态 / 占位区块 — 文字与按钮间距统一
+ * 解决 inline empty-state 使用 grid + place-items:center 导致标题与按钮贴在一起
+ */
+
+/* ── 虚线占位空态（排除 EmptyState panel 左对齐变体） ── */
+.student-page .empty-state:not(.panel),
+.teacher-page .empty-state:not(.panel),
+.admin-page .empty-state:not(.panel) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+}
+
+.student-page .empty-state.compact:not(.panel),
+.teacher-page .empty-state.compact:not(.panel),
+.admin-page .empty-state.compact:not(.panel) {
+  gap: 14px !important;
+}
+
+.student-page .empty-state:not(.panel) > :is(h1, h2, h3, h4, p),
+.teacher-page .empty-state:not(.panel) > :is(h1, h2, h3, h4, p),
+.admin-page .empty-state:not(.panel) > :is(h1, h2, h3, h4, p) {
+  margin: 0 !important;
+}
+
+/* ── 任务详情等工作区空态 ── */
+.empty-workspace {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.empty-workspace > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 16px !important;
+  max-width: 420px;
+  text-align: center;
+}
+
+.empty-workspace h4,
+.empty-workspace p {
+  margin: 0 !important;
+}
+
+/* ── 操作按钮组 ── */
+.empty-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  margin-top: 0 !important;
+}
+
+/* ── 列表空卡片 ── */
+.student-page .empty-card,
+.teacher-page .empty-card,
+.admin-page .empty-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+}
+
+.student-page .empty-card > :is(h1, h2, h3, h4, p),
+.teacher-page .empty-card > :is(h1, h2, h3, h4, p),
+.admin-page .empty-card > :is(h1, h2, h3, h4, p) {
+  margin: 0 !important;
+}
+
+.student-page .empty-card .empty-action-btn,
+.student-page .empty-card .primary-btn,
+.student-page .empty-card .secondary-btn,
+.teacher-page .empty-card .primary-btn,
+.teacher-page .empty-card .secondary-btn {
+  margin-top: 0 !important;
+}
+
+/* ── 错误态卡片（标题区 + 按钮） ── */
+.student-page .card.error-state,
+.teacher-page .card.error-state,
+.admin-page .card.error-state,
+.student-page .error-state.card,
+.teacher-page .error-state.card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  text-align: center !important;
+}
+
+.student-page .card.error-state > div,
+.teacher-page .card.error-state > div,
+.student-page .error-state.card > div,
+.teacher-page .error-state.card > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.student-page .card.error-state :is(h1, h2, h3, h4, p, .eyebrow),
+.teacher-page .card.error-state :is(h1, h2, h3, h4, p, .eyebrow) {
+  margin: 0 !important;
+}
+
+/* ── 详情区空态 ── */
+.detail-empty.empty-state,
+.detail-empty {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  text-align: center;
+}
+
+.detail-empty :is(h1, h2, h3, h4, p) {
+  margin: 0 !important;
+}
+
+/* ── 独立 error-state（非 card） ── */
+.student-page .error-state:not(.card),
+.teacher-page .error-state:not(.card) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+}
+
+.student-page .error-state:not(.card) :is(h1, h2, h3, h4, p),
+.teacher-page .error-state:not(.card) :is(h1, h2, h3, h4, p) {
+  margin: 0 !important;
+}

@@ -1,0 +1,530 @@
+/**
+ * Student UI polish — no white bleed, rounded blocks, text containment
+ */
+
+html[data-student-theme='dark'],
+html[data-student-theme='dark'] body,
+html[data-student-theme='dark'] #app {
+  background: var(--tt-bg);
+  color: var(--tt-text);
+}
+
+/* Nested surfaces — card 内信息块统一冷色 inset */
+.student-page .detail-grid > div,
+.student-page .detail-grid div,
+.student-page .detail-block,
+.student-page .info-item,
+.student-page .fact-card,
+.student-page .stat-box,
+.student-page .meta-box,
+.student-page .note-card,
+.student-page .message {
+  background: var(--student-surface-inset, var(--tt-surface-muted)) !important;
+  border: 1px solid var(--student-surface-inset-border, var(--tt-border-subtle)) !important;
+  color: var(--tt-text);
+}
+
+.student-page .tab-btn,
+.student-page .appeal-row {
+  background: var(--tt-surface) !important;
+  border: 1px solid var(--tt-border-subtle) !important;
+}
+
+.student-page .tab-btn.active,
+.student-page .appeal-row.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+.student-page .card {
+  background: var(--student-tile-bg, var(--tt-surface)) !important;
+  border: 1px solid var(--tt-border-subtle) !important;
+  backdrop-filter: none !important;
+}
+
+.student-page .empty-state,
+.student-page .error-state {
+  background: var(--student-surface-inset, var(--tt-surface-muted)) !important;
+  border: 1px dashed var(--student-surface-inset-border, var(--tt-border)) !important;
+}
+
+/* Rounded blocks — pills/crumbs keep full radius */
+.student-page .card,
+.student-page .appeal-hero,
+.student-page .appeal-queue,
+.student-page .appeal-detail,
+.student-page .detail-grid > div,
+.student-page .detail-block,
+.student-page .filter-panel,
+.student-page .topbar,
+.student-page .class-card,
+.student-page .metric-box,
+.student-page .summary-card,
+.student-page .tab-btn,
+.student-page .appeal-row,
+.student-page .task-row,
+.student-page .notification-row,
+.student-page .empty-state,
+.student-page .error-state,
+.student-page .error-card,
+.student-page .empty-card,
+.student-page .greeting-bar,
+.student-page .bento-surface,
+.student-page .info-card,
+.student-page .skeleton-row,
+.student-page .class-skeleton,
+.student-page .queue-item,
+.student-page .hero,
+.student-page .panel,
+.student-page .workbench,
+.student-page .message,
+.student-page input,
+.student-page select,
+.student-page textarea {
+  border-radius: var(--tt-radius-xl, 18px);
+}
+
+.student-page .status-pill,
+.student-page .status-badge,
+.student-page .summary-chip,
+.student-page .crumb,
+.student-page .scope-tab,
+.student-page .primary-btn,
+.student-page .secondary-btn {
+  border-radius: var(--tt-radius-full, 9999px);
+}
+
+.student-page .primary-btn,
+.student-page .secondary-btn {
+  border-radius: var(--tt-radius-lg, 14px);
+}
+
+/* Text containment — prevent overflow past boxes */
+.student-page .metric-box,
+.student-page .card-middle,
+.student-page .card-title-block,
+.student-page .detail-grid > div,
+.student-page .detail-block,
+.student-page .appeal-row,
+.student-page .class-card {
+  min-width: 0;
+}
+
+.student-page .metric-value {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.2;
+}
+
+.student-page .metric-value.compact {
+  font-size: clamp(12px, 1.35vw, 14px);
+  line-height: 1.35;
+  font-weight: 700;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.student-page .detail-grid dd {
+  margin: 6px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.student-page .detail-grid dt {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.student-page .detail-head h2,
+.student-page .class-name,
+.student-page .appeal-row strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.student-page .appeal-row strong {
+  font-size: 14px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.student-page .row-meta,
+.student-page .row-time {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Dark theme refinements */
+[data-student-theme='dark'] .student-page .appeal-row.active {
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--tt-accent) 14%, transparent), transparent 34%),
+    var(--tt-surface) !important;
+}
+
+[data-student-theme='dark'] .student-page .filter-panel {
+  background: var(--tt-surface) !important;
+  border: 1px solid var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] .student-sidebar {
+  border-right-color: var(--tt-border) !important;
+}
+
+/* ── Typography scale — page / section / card titles ── */
+.student-page .topbar,
+.student-page .appeal-hero,
+.student-page .task-hero,
+.student-page .notification-hero,
+.student-page .card.task-hero,
+.student-page .card.notification-hero,
+.student-page .topbar-main {
+  padding: 18px 20px !important;
+}
+
+.student-page .title-block,
+.student-page .topbar-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.student-page .topbar .title-block > h1,
+.student-page .topbar .title-block > h2,
+.student-page .topbar-main > h2,
+.student-page .topbar-main .title-block > h2,
+.student-page .appeal-hero h1,
+.student-page .task-hero h1,
+.student-page .notification-hero h2,
+.student-page .page-title,
+.student-page .profile-header h1,
+.student-page .greeting-text,
+.student-page .empty-heading,
+.student-page .hero-title {
+  font-size: clamp(20px, 1.85vw, 24px) !important;
+  font-weight: 700 !important;
+  line-height: 1.28 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.student-page h1 {
+  font-size: clamp(20px, 1.85vw, 24px) !important;
+  line-height: 1.28 !important;
+}
+
+.student-page .topbar > .title-block > h2,
+.student-page .student-class-hub .title-block > h2 {
+  font-size: clamp(20px, 1.85vw, 24px) !important;
+  font-weight: 700 !important;
+  line-height: 1.28 !important;
+}
+
+.student-page .queue-head h2,
+.student-page .section-head h2,
+.student-page .panel-head h2,
+.student-page .task-list-head h2,
+.student-page .workspace-head h2 {
+  font-size: clamp(16px, 1.5vw, 18px) !important;
+  font-weight: 700 !important;
+  line-height: 1.32 !important;
+}
+
+.student-page h3 {
+  font-size: clamp(15px, 1.4vw, 17px) !important;
+  line-height: 1.35 !important;
+}
+
+.student-page .summary-card strong,
+.student-page .kpi-value,
+.student-page .stat-value {
+  font-size: clamp(20px, 1.8vw, 24px) !important;
+  line-height: 1.1 !important;
+}
+
+.student-page .tab-btn strong {
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+}
+
+.student-page .group-identity-card h3,
+.student-page .identity-card h3 {
+  font-size: clamp(17px, 1.7vw, 20px) !important;
+  line-height: 1.3 !important;
+}
+
+.student-page .progress-hero-value {
+  font-size: clamp(24px, 2vw, 28px) !important;
+  line-height: 1.1 !important;
+}
+
+.student-page .detail-head h2 {
+  font-size: clamp(16px, 1.6vw, 19px) !important;
+  line-height: 1.3 !important;
+}
+
+.student-page .class-name {
+  font-size: clamp(15px, 1.5vw, 17px) !important;
+  line-height: 1.32 !important;
+}
+
+/* Class hub cards — compact sizing */
+.student-class-hub .class-name {
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+}
+
+.student-class-hub .class-card .metric-value {
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+}
+
+.student-class-hub .class-card .metric-value.compact {
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+}
+
+.student-class-hub .class-card .metric-label {
+  font-size: 11px !important;
+}
+
+.student-class-hub .status-badge {
+  min-height: 26px !important;
+  padding: 0 10px !important;
+  font-size: 11px !important;
+}
+
+.student-class-hub .enter-btn {
+  min-height: 30px !important;
+  padding: 0 16px !important;
+  font-size: 12px !important;
+  border-radius: var(--tt-radius-full, 9999px) !important;
+}
+
+.student-page .eyebrow,
+.student-page .section-kicker,
+.student-page .dialog-eyebrow,
+.student-class-hub .eyebrow,
+.student-class-hub .dialog-eyebrow,
+.student-section-chip,
+.student-page .section-title,
+.student-home .section-title,
+.student-page .member-section-label,
+.student-class-hub .hub-embedded-head .section-title,
+.student-page .panel-head h2,
+.student-page .panel-head h3,
+.student-page .queue-head h2,
+.student-page .queue-head h3,
+.student-page .task-desc-label,
+.student-page .panel-count,
+.student-page .empty-kicker,
+.student-page .hero-badge,
+.student-page .workbench-pill,
+.student-page .default-pill,
+.student-page .task-kind,
+.student-section-meta,
+.student-class-hub .section-count,
+.student-page .section-count {
+  display: inline-flex !important;
+  align-items: center;
+  width: fit-content;
+  min-height: 36px;
+  padding: 0 16px !important;
+  margin: 0;
+  border-radius: 999px;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  line-height: 1.25 !important;
+  color: var(--tt-accent) !important;
+  background: var(--tt-accent-soft) !important;
+  border: 1px solid var(--tt-accent-border) !important;
+  box-shadow: none !important;
+}
+
+.student-page .dialog-overlay .eyebrow,
+.student-page .dialog-panel .eyebrow,
+.student-page .dialog-panel .dialog-eyebrow {
+  min-height: 32px;
+  padding: 0 14px !important;
+  font-size: 13px !important;
+}
+
+.student-section-meta,
+.student-class-hub .section-count,
+.student-page .section-count,
+.student-page .panel-count {
+  min-height: 32px;
+  padding: 0 14px !important;
+  font-size: 13px !important;
+}
+
+/* 图一：班级/状态/数量等胶囊提示 — 加大字号与内边距 */
+.student-page .summary-chip {
+  min-height: 32px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.student-page .status-pill,
+.student-page .status-badge,
+.student-page .assign-pill,
+.student-page .default-pill,
+.student-page .read-badge {
+  min-height: 30px;
+  padding: 0 13px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.student-page .task-card-btn--status {
+  min-height: 36px;
+  font-size: 13px;
+}
+
+.student-page .task-card .class-pill {
+  min-height: 28px;
+  padding: 0 12px !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+}
+
+/* 子任务池 / 任务列表卡片正文 */
+.student-page .pool-card-body .task-name,
+.student-page .task-card-title {
+  font-size: 16px !important;
+  line-height: 1.35 !important;
+}
+
+.student-page .pool-meta-label {
+  font-size: 12px !important;
+}
+
+.student-page .pool-meta-value,
+.student-page .pool-meta-progress {
+  font-size: 13px !important;
+}
+
+.student-page .pool-line-label {
+  font-size: 14px !important;
+  min-width: 72px !important;
+}
+
+.student-page .pool-line-value {
+  font-size: 15px !important;
+}
+
+.student-page .task-deadline-line {
+  font-size: 15px !important;
+}
+
+.student-page .deadline-label {
+  font-size: 14px !important;
+}
+
+.student-page .deadline-value {
+  font-size: 15px !important;
+}
+
+.student-page .top-actions,
+.student-page .hero-actions {
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* ── Section title chips — same accent pill as eyebrow ── */
+.student-section-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.student-page .summary-chip {
+  color: var(--tt-text-secondary) !important;
+  background: var(--student-surface-inset, var(--tt-surface-muted)) !important;
+  border: 1px solid var(--student-surface-inset-border, var(--tt-border-subtle)) !important;
+}
+
+.student-page .summary-chip.active {
+  color: var(--tt-accent) !important;
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+[data-student-theme='dark'] .student-page .summary-chip {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+}
+
+[data-student-theme='dark'] .student-page .summary-chip.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+/* 亮色主题 — 任务/申诉/通知等页面内嵌块全面统一冷色 inset */
+:root:not([data-student-theme='dark']) .student-page .context-item,
+:root:not([data-student-theme='dark']) .student-page .context-summary-item,
+:root:not([data-student-theme='dark']) .student-page .score-item,
+:root:not([data-student-theme='dark']) .student-page .score-list,
+:root:not([data-student-theme='dark']) .student-page .score-row,
+:root:not([data-student-theme='dark']) .student-page .formula-panel,
+:root:not([data-student-theme='dark']) .student-page .pool-meta-box,
+:root:not([data-student-theme='dark']) .student-page .batch-row,
+:root:not([data-student-theme='dark']) .student-page .progress-hero,
+:root:not([data-student-theme='dark']) .student-page .member-progress-strip,
+:root:not([data-student-theme='dark']) .student-page .member-progress-card,
+:root:not([data-student-theme='dark']) .student-page .support-panel,
+:root:not([data-student-theme='dark']) .student-page .task-desc-panel,
+:root:not([data-student-theme='dark']) .student-page .submit-panel,
+:root:not([data-student-theme='dark']) .student-page .reviews-panel,
+:root:not([data-student-theme='dark']) .student-page .review-row,
+:root:not([data-student-theme='dark']) .student-page .member-option,
+:root:not([data-student-theme='dark']) .student-page .type-option,
+:root:not([data-student-theme='dark']) .student-page .option-btn,
+:root:not([data-student-theme='dark']) .student-page .submit-preview,
+:root:not([data-student-theme='dark']) .student-page .submit-field textarea,
+:root:not([data-student-theme='dark']) .student-page .submit-field input,
+:root:not([data-student-theme='dark']) .student-page .stat-tile,
+:root:not([data-student-theme='dark']) .student-page .queue-item,
+:root:not([data-student-theme='dark']) .student-page .log-row,
+:root:not([data-student-theme='dark']) .student-page .join-box,
+:root:not([data-student-theme='dark']) .student-page .skeleton-row,
+:root:not([data-student-theme='dark']) .student-page .skeleton-card,
+:root:not([data-student-theme='dark']) .student-page .class-skeleton,
+:root:not([data-student-theme='dark']) .dialog-panel .secondary-btn,
+:root:not([data-student-theme='dark']) .dialog-panel .dialog-btn.cancel,
+:root:not([data-student-theme='dark']) .pool-detail-field input,
+:root:not([data-student-theme='dark']) .pool-detail-field textarea {
+  background: var(--student-surface-inset, var(--tt-surface-muted)) !important;
+  border-color: var(--student-surface-inset-border, var(--tt-border-subtle)) !important;
+}
+
+:root:not([data-student-theme='dark']) .student-page .option-btn:hover,
+:root:not([data-student-theme='dark']) .student-page .member-option:hover,
+:root:not([data-student-theme='dark']) .student-page .type-option:hover {
+  background: var(--student-surface-inset-hover, var(--tt-surface-hover)) !important;
+}
+
+:root:not([data-student-theme='dark']) .student-page .option-btn.active,
+:root:not([data-student-theme='dark']) .student-page .member-option.active,
+:root:not([data-student-theme='dark']) .student-page .type-option.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+}

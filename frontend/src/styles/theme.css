@@ -1,0 +1,15 @@
+:root {
+  --app-bg: #f5f7fa;
+  --app-text: #303133;
+  --card-bg: #ffffff;
+}
+
+html.dark {
+  --app-bg: #141414;
+  --app-text: #e5eaf3;
+  --card-bg: #1d1e1f;
+}
+
+html.dark body {
+  color-scheme: dark;
+}

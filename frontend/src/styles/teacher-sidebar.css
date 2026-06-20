@@ -1,0 +1,130 @@
+/**
+ * Teacher sidebar — isolated from page-level dark overrides.
+ * Loaded last so nav / workspace tabs never inherit blanket surface rules.
+ */
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar {
+  background: var(--teacher-sidebar-bg) !important;
+  border-color: var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .nav-item,
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .workspace-tab,
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .collapse-btn {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .nav-item {
+  background: transparent !important;
+  color: var(--tt-text-secondary) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .nav-item:hover {
+  background: var(--tt-surface-hover) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .nav-item.active {
+  background: var(--tt-accent-soft) !important;
+  color: var(--tt-accent) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .nav-item.active::before {
+  background: var(--tt-accent-gradient) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .nav-item.active::after {
+  display: none !important;
+  content: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .nav-item.active .nav-icon-wrap {
+  background: var(--tt-accent-soft) !important;
+  color: var(--tt-accent) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .workspace-card {
+  background: var(--tt-surface-muted) !important;
+  border: 1px solid var(--tt-border) !important;
+  border-radius: var(--tt-radius-lg) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .workspace-title,
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .section-label {
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .class-switcher-menu {
+  background: var(--tt-bg-elevated) !important;
+  border-color: var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .class-switcher-btn.compact {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border-subtle) !important;
+  color: var(--tt-text-secondary) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .class-switcher-btn.compact:hover,
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .class-switcher-btn.compact.active {
+  background: var(--tt-surface-hover) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .workspace-tab {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--tt-text-secondary) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .workspace-tab:hover {
+  background: var(--tt-surface-hover) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar button.workspace-tab.active {
+  background: var(--tt-accent-soft) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-accent) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .workspace-tab.active::before {
+  background: var(--tt-accent-gradient) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .brand-mark {
+  color: #ffffff !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .collapse-btn {
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .collapse-btn:hover {
+  background: var(--tt-surface-hover) !important;
+  color: var(--tt-text) !important;
+}
+
+/* Collapsed: no active indicator dots or overflow */
+.teacher-sidebar.collapsed .nav-item.active::after {
+  display: none !important;
+  content: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding-inline: var(--tt-space-2);
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar.collapsed .nav-item.active::before {
+  display: none !important;
+}

@@ -1,0 +1,218 @@
+/**
+ * Teacher dark theme — page-level overrides (non-scoped).
+ * Fixes hardcoded light surfaces in teacher views; load after teacher-sidebar.css.
+ */
+html[data-teacher-theme='midnight-classroom'] {
+  color-scheme: dark;
+
+  /* Re-lock shared tokens (must win over any :root light fallbacks) */
+  --tt-bg: #0a0a0a;
+  --tt-bg-elevated: #141414;
+  --tt-bg-sunken: #0f0f0f;
+  --tt-surface: #1a1a1a;
+  --tt-surface-hover: #242424;
+  --tt-surface-muted: #222222;
+  --tt-border: rgba(255, 255, 255, 0.14);
+  --tt-border-subtle: rgba(255, 255, 255, 0.1);
+  --tt-text: #f5f5f5;
+  --tt-text-secondary: #a0a0a0;
+  --tt-text-tertiary: #666666;
+  --teacher-surface: #1a1a1a;
+  --teacher-surface-muted: #1e1e1e;
+  --teacher-sidebar-bg: #111111;
+  --teacher-header-bg: rgba(10, 10, 10, 0.9);
+}
+
+/* ── Shell: breadcrumbs & section labels ── */
+html[data-teacher-theme='midnight-classroom'] .crumb {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border-subtle) !important;
+  color: var(--tt-text-secondary) !important;
+  box-shadow: var(--tt-shadow-xs) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .crumb:hover {
+  background: var(--tt-surface-hover) !important;
+  color: var(--tt-text) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-sidebar .section-label {
+  color: var(--tt-text-tertiary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-header {
+  background: var(--teacher-header-bg) !important;
+  border-color: var(--tt-border) !important;
+}
+
+/* ── Class Center (TeacherClassesView) ── */
+html[data-teacher-theme='midnight-classroom'] .classes-page .page-hero {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.2), transparent 38%),
+    radial-gradient(circle at 100% 0%, rgba(124, 58, 237, 0.14), transparent 34%),
+    linear-gradient(165deg, #1a1f2e, #141414) !important;
+  border-color: color-mix(in srgb, var(--tt-accent) 22%, var(--tt-border)) !important;
+  box-shadow: var(--tt-shadow-sm) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .stat-chip {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .stat-chip:hover {
+  border-color: var(--tt-accent-border) !important;
+  box-shadow: var(--tt-shadow-md) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .stat-chip.active {
+  background: linear-gradient(
+    160deg,
+    var(--tt-surface-hover),
+    color-mix(in srgb, var(--tt-accent) 16%, var(--tt-surface))
+  ) !important;
+  border-color: var(--tt-accent-border) !important;
+  box-shadow: 0 0 0 1px var(--tt-accent-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .toolbar-panel {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.12), transparent 48%),
+    linear-gradient(165deg, rgba(26, 31, 46, 0.98), #141414) !important;
+  border-color: color-mix(in srgb, var(--tt-accent) 14%, var(--tt-border)) !important;
+  box-shadow: var(--tt-shadow-sm) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .search-control,
+html[data-teacher-theme='midnight-classroom'] .classes-page .semester-control {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .search-control:focus-within,
+html[data-teacher-theme='midnight-classroom'] .classes-page .semester-control:focus-within {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-accent-border) !important;
+  box-shadow: 0 0 0 3px var(--tt-accent-soft) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .search-control input,
+html[data-teacher-theme='midnight-classroom'] .classes-page .semester-control select {
+  color: var(--tt-text) !important;
+  background: transparent !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .search-clear {
+  background: var(--tt-surface-hover) !important;
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .toolbar-meta-pill {
+  background: color-mix(in srgb, var(--tt-accent) 14%, var(--tt-surface)) !important;
+  border-color: var(--tt-accent-border) !important;
+  color: var(--tt-text-secondary) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .class-card-skeleton {
+  border-color: var(--tt-border-subtle) !important;
+  background: linear-gradient(
+    110deg,
+    var(--tt-surface-muted) 8%,
+    var(--tt-surface-hover) 18%,
+    var(--tt-surface-muted) 33%
+  ) !important;
+  background-size: 200% 100% !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .class-card {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--card-accent, var(--tt-accent)) 22%, transparent), transparent 42%),
+    linear-gradient(165deg, var(--tt-surface), color-mix(in srgb, var(--card-accent, var(--tt-accent)) 8%, var(--tt-surface-muted))) !important;
+  border-color: color-mix(in srgb, var(--card-accent, var(--tt-accent)) 18%, var(--tt-border)) !important;
+  box-shadow: var(--tt-shadow-sm) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .class-card.archived {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(148, 163, 184, 0.08), transparent 40%),
+    linear-gradient(165deg, var(--tt-surface-muted), var(--tt-surface)) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .metric-box {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+  backdrop-filter: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .metric-box--code {
+  background: color-mix(in srgb, var(--card-accent, var(--tt-accent)) 10%, var(--tt-surface-muted)) !important;
+  border-color: color-mix(in srgb, var(--card-accent, var(--tt-accent)) 16%, var(--tt-border)) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .metric-box--invite {
+  background: linear-gradient(
+    145deg,
+    var(--tt-surface-muted),
+    color-mix(in srgb, var(--card-accent, var(--tt-accent)) 12%, var(--tt-surface))
+  ) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .metric-box--muted {
+  background: var(--tt-surface-muted) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .status-badge {
+  background: color-mix(in srgb, var(--card-accent, var(--tt-accent)) 14%, var(--tt-surface-muted)) !important;
+  color: var(--tt-accent-secondary) !important;
+  border-color: var(--tt-accent-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .create-result-panel {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(34, 197, 94, 0.1), transparent 42%),
+    linear-gradient(135deg, var(--tt-surface-muted), var(--tt-surface)) !important;
+  border-color: color-mix(in srgb, var(--tt-success) 28%, var(--tt-border)) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .invite-result-box {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-accent-border) !important;
+  box-shadow: none !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .empty-card {
+  background:
+    radial-gradient(circle at 50% 0%, var(--tt-accent-soft), transparent 55%),
+    var(--tt-surface) !important;
+  border-color: var(--tt-border) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .dialog-panel {
+  background: var(--tt-surface) !important;
+  border-color: var(--tt-border) !important;
+  box-shadow: var(--tt-shadow-xl) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .dialog-head {
+  background: linear-gradient(180deg, var(--tt-surface-muted), var(--tt-surface)) !important;
+  border-color: var(--tt-divider) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .classes-page .dialog-grid input,
+html[data-teacher-theme='midnight-classroom'] .classes-page .dialog-grid select {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border) !important;
+  color: var(--tt-text) !important;
+}
+
+/* ── Teacher subview topbar (shared page shell) ── */
+html[data-teacher-theme='midnight-classroom'] .teacher-subview .topbar {
+  background: var(--tt-surface) !important;
+  border: 1px solid var(--tt-border-subtle) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-teacher-theme='midnight-classroom'] .teacher-subview .topbar h2 {
+  color: var(--tt-text) !important;
+}

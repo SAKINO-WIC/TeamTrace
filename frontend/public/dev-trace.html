@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeamTrace 开发历程与技术栈</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: oklch(0.145 0.035 252);
+        --bg-soft: oklch(0.205 0.042 252);
+        --panel: oklch(0.245 0.045 252 / 0.78);
+        --panel-strong: oklch(0.29 0.054 252 / 0.92);
+        --line: oklch(0.72 0.05 246 / 0.24);
+        --line-strong: oklch(0.76 0.08 238 / 0.42);
+        --text: oklch(0.95 0.01 248);
+        --muted: oklch(0.75 0.025 248);
+        --faint: oklch(0.62 0.025 248);
+        --cyan: oklch(0.82 0.15 190);
+        --blue: oklch(0.68 0.17 248);
+        --violet: oklch(0.68 0.14 285);
+        --orange: oklch(0.77 0.16 62);
+        --green: oklch(0.76 0.16 155);
+        --shadow: 0 28px 80px oklch(0.05 0.03 252 / 0.42);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 10% 12%, oklch(0.62 0.16 190 / 0.18), transparent 28rem),
+          radial-gradient(circle at 88% 0%, oklch(0.61 0.16 282 / 0.16), transparent 30rem),
+          linear-gradient(135deg, var(--bg), oklch(0.105 0.035 260));
+        color: var(--text);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Microsoft YaHei", sans-serif;
+        line-height: 1.6;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        content: "";
+        background-image:
+          linear-gradient(oklch(1 0 0 / 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, oklch(1 0 0 / 0.035) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(to bottom, black, transparent 84%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid oklch(1 0 0 / 0.08);
+        background: oklch(0.14 0.035 252 / 0.76);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav-inner {
+        width: min(1180px, calc(100% - 40px));
+        height: 68px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid var(--line-strong);
+        border-radius: 13px;
+        background:
+          linear-gradient(135deg, oklch(0.72 0.15 190 / 0.22), oklch(0.67 0.18 252 / 0.18)),
+          oklch(0.18 0.045 252 / 0.86);
+        color: var(--cyan);
+        font-size: 13px;
+        box-shadow: 0 14px 34px oklch(0.08 0.04 252 / 0.4);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .nav-links a {
+        border: 1px solid transparent;
+        border-radius: 999px;
+        padding: 8px 12px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .nav-links a:hover {
+        border-color: var(--line);
+        color: var(--text);
+        background: oklch(1 0 0 / 0.06);
+      }
+
+      .hero {
+        position: relative;
+        min-height: calc(100vh - 68px);
+        display: grid;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      #trace-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.82;
+      }
+
+      .hero-inner {
+        position: relative;
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 86px 0 74px;
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(340px, 0.88fr);
+        gap: 72px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 13px;
+        background: oklch(1 0 0 / 0.055);
+        color: var(--cyan);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .eyebrow::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 18px var(--green);
+        content: "";
+      }
+
+      h1 {
+        max-width: 720px;
+        margin: 0;
+        font-size: clamp(42px, 6.5vw, 76px);
+        line-height: 1.02;
+        font-weight: 950;
+        letter-spacing: 0;
+      }
+
+      .hero-copy {
+        max-width: 620px;
+        margin: 26px 0 0;
+        color: var(--muted);
+        font-size: clamp(15px, 1.45vw, 18px);
+        line-height: 1.82;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .btn {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        padding: 0 20px;
+        font-size: 14px;
+        font-weight: 900;
+        transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--cyan), var(--blue));
+        color: oklch(0.14 0.04 252);
+      }
+
+      .btn-ghost {
+        background: oklch(1 0 0 / 0.07);
+        color: var(--text);
+      }
+
+      .console-card {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        background:
+          linear-gradient(145deg, oklch(1 0 0 / 0.08), transparent),
+          var(--panel);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .console-card::before {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        background:
+          radial-gradient(circle at 18% 12%, oklch(0.82 0.15 190 / 0.1), transparent 18rem),
+          linear-gradient(135deg, oklch(1 0 0 / 0.035), transparent 44%);
+      }
+
+      .console-top {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        padding: 0 18px;
+      }
+
+      .dots {
+        display: flex;
+        gap: 7px;
+      }
+
+      .dots span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--faint);
+      }
+
+      .dots span:nth-child(1) {
+        background: var(--orange);
+      }
+
+      .dots span:nth-child(2) {
+        background: var(--cyan);
+      }
+
+      .dots span:nth-child(3) {
+        background: var(--green);
+      }
+
+      .console-top strong {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .console-body {
+        position: relative;
+        z-index: 1;
+        padding: 22px;
+      }
+
+      .pulse-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .pulse {
+        min-height: 118px;
+        border: 1px solid oklch(1 0 0 / 0.09);
+        border-radius: 18px;
+        padding: 18px;
+        background: oklch(0.16 0.035 252 / 0.74);
+      }
+
+      .pulse b {
+        display: block;
+        color: var(--cyan);
+        font-size: clamp(28px, 3.8vw, 40px);
+        line-height: 1;
+        min-height: 42px;
+      }
+
+      .pulse span {
+        display: block;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .console-note {
+        min-height: 20px;
+        margin: 16px 0 0;
+        color: var(--faint);
+        font-size: 12px;
+      }
+
+      section {
+        padding: 92px 0;
+      }
+
+      .section-inner {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 0.72fr) minmax(300px, 0.62fr);
+        gap: 46px;
+        align-items: end;
+        margin-bottom: 34px;
+      }
+
+      .section-kicker {
+        margin: 0 0 10px;
+        color: var(--cyan);
+        font-size: 12px;
+        font-weight: 950;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(30px, 4.6vw, 56px);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .section-desc {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.85;
+      }
+
+      .capability-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .capability {
+        min-height: 250px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 26px;
+        background: var(--panel);
+      }
+
+      .capability .num {
+        color: var(--cyan);
+        font-size: 12px;
+        font-weight: 950;
+      }
+
+      .capability h3,
+      .stack-card h3,
+      .timeline-card h3,
+      .anatomy-card h3 {
+        margin: 16px 0 8px;
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
+      .capability p,
+      .stack-card p,
+      .timeline-card p,
+      .anatomy-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .stack {
+        background: linear-gradient(180deg, transparent, oklch(0.18 0.04 252 / 0.78), transparent);
+      }
+
+      .stack-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 14px;
+        align-items: stretch;
+      }
+
+      .stack-card,
+      .timeline-card,
+      .anatomy-card {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 22px;
+        background: var(--panel);
+      }
+
+      .stack-card.featured {
+        min-height: 100%;
+        background:
+          radial-gradient(circle at 0 0, oklch(0.75 0.15 190 / 0.16), transparent 22rem),
+          var(--panel-strong);
+      }
+
+      .tech-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .tech-row {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+        border: 1px solid oklch(1 0 0 / 0.08);
+        border-radius: 15px;
+        padding: 12px;
+        background: oklch(0.14 0.035 252 / 0.54);
+      }
+
+      .tech-row strong {
+        color: var(--text);
+        font-size: 13px;
+      }
+
+      .tech-row span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .arch-flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .arch-node {
+        position: relative;
+        min-height: 118px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 16px;
+        background: oklch(0.13 0.035 252 / 0.72);
+      }
+
+      .arch-node:not(:last-child)::after {
+        position: absolute;
+        top: 50%;
+        right: -11px;
+        width: 12px;
+        height: 2px;
+        background: var(--cyan);
+        content: "";
+      }
+
+      .arch-node b {
+        display: block;
+        color: var(--cyan);
+        font-size: 12px;
+      }
+
+      .arch-node strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 16px;
+      }
+
+      .arch-node span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+      }
+
+      .timeline-card {
+        display: grid;
+        grid-template-columns: 170px minmax(0, 1fr);
+        gap: 34px;
+        align-items: start;
+      }
+
+      .timeline-date {
+        color: var(--cyan);
+        font-size: 13px;
+        font-weight: 950;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .tag {
+        border: 1px solid oklch(0.82 0.15 190 / 0.24);
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: oklch(0.82 0.15 190 / 0.08);
+        color: oklch(0.86 0.12 190);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .anatomy-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .anatomy-card strong {
+        display: block;
+        color: var(--cyan);
+        font-size: clamp(30px, 5vw, 48px);
+        line-height: 1;
+      }
+
+      .quote-strip {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 34px;
+        background:
+          radial-gradient(circle at 100% 0, oklch(0.8 0.16 62 / 0.13), transparent 24rem),
+          var(--panel-strong);
+      }
+
+      .quote-strip p {
+        max-width: 860px;
+        margin: 0;
+        font-size: clamp(22px, 3.2vw, 38px);
+        line-height: 1.18;
+        font-weight: 900;
+      }
+
+      .quote-strip span {
+        display: block;
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 34px 0;
+        color: var(--faint);
+      }
+
+      .footer-inner {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        font-size: 13px;
+      }
+
+      .footer-inner a {
+        color: var(--cyan);
+        font-weight: 900;
+      }
+
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1), transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 920px) {
+        .hero-inner,
+        .section-head,
+        .stack-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .capability-grid,
+        .anatomy-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .capability:nth-child(2),
+        .capability:nth-child(3) {
+          transform: none;
+        }
+
+        .arch-flow {
+          grid-template-columns: 1fr;
+        }
+
+        .arch-node:not(:last-child)::after {
+          top: auto;
+          right: auto;
+          left: 28px;
+          bottom: -11px;
+          width: 2px;
+          height: 12px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav-inner {
+          width: min(100% - 28px, 1180px);
+          height: auto;
+          min-height: 66px;
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .nav-links {
+          justify-content: flex-start;
+        }
+
+        .hero-inner,
+        .section-inner,
+        .footer-inner {
+          width: min(100% - 28px, 1180px);
+        }
+
+        .pulse-grid,
+        .capability-grid,
+        .anatomy-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .timeline-card {
+          grid-template-columns: 1fr;
+        }
+
+        section {
+          padding: 68px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="nav">
+        <div class="nav-inner">
+          <a class="brand" href="#top" aria-label="回到顶部">
+            <span class="brand-mark">TT</span>
+            <span>TeamTrace Dev Trace</span>
+          </a>
+          <div class="nav-links" aria-label="页面导航">
+            <a href="#live">实时数据</a>
+            <a href="#capability">系统能力</a>
+            <a href="#stack">技术栈</a>
+            <a href="#timeline">开发历程</a>
+            <a href="/#/auth">返回登录</a>
+          </div>
+        </div>
+      </nav>
+
+      <main id="top">
+        <section class="hero">
+          <canvas id="trace-canvas" aria-hidden="true"></canvas>
+          <div class="hero-inner">
+            <div data-reveal>
+              <p class="eyebrow">从开发日志到生产上线</p>
+              <h1>TeamTrace 的开发轨迹与工程全景。</h1>
+              <p class="hero-copy">
+                从课堂协作闭环到自由协作 Beta，从本地开发到 Sealos 生产上线。这里展示真实技术栈、核心功能线和当前运行数据。
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="https://teamtrace.cloud/#/auth">进入系统</a>
+                <a class="btn btn-ghost" href="https://teamtrace.cloud/#/product?returnTo=/auth">查看产品介绍</a>
+              </div>
+            </div>
+
+            <aside class="console-card" id="live" data-reveal>
+              <div class="console-top">
+                <div class="dots"><span></span><span></span><span></span></div>
+                <strong>public.stats()</strong>
+              </div>
+              <div class="console-body">
+                <div class="pulse-grid">
+                  <div class="pulse"><b data-stat="totalUsers">...</b><span>教师与学生用户</span></div>
+                  <div class="pulse"><b data-stat="classCount">...</b><span>班级空间</span></div>
+                  <div class="pulse"><b data-stat="taskCount">...</b><span>课堂任务</span></div>
+                  <div class="pulse"><b data-stat="subtaskCount">...</b><span>子任务记录</span></div>
+                </div>
+                <p class="console-note" id="stats-note"></p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="capability">
+          <div class="section-inner">
+            <div class="section-head" data-reveal>
+              <div>
+                <p class="section-kicker">PRODUCT LINE</p>
+                <h2>目前系统已经形成两条主线。</h2>
+              </div>
+              <p class="section-desc">
+                第一条是课堂协作闭环，围绕教师、班级、小组任务、评分、报告、申诉和通知展开。第二条是自由协作 Beta，面向没有监管者的邀请制协作空间。
+              </p>
+            </div>
+
+            <div class="capability-grid">
+              <article class="capability" data-reveal>
+                <span class="num">01</span>
+                <h3>课堂模式</h3>
+                <p>教师创建班级和任务，学生加入班级、小组协作、认领子任务、提交成果。评分与报告属于这条主线：任务评分和课程评分分离，互评限定在组内，申诉用于情况反馈和教师回复，教师端负责查看进度、处理申诉、导出报告。</p>
+              </article>
+              <article class="capability" data-reveal>
+                <span class="num">02</span>
+                <h3>自由协作 Beta</h3>
+                <p>自由协作不做评分和绩效。它把任务、负责人、提交、接收、打回、交接和进度可视化，制造一起推进的环境。</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="stack" id="stack">
+          <div class="section-inner">
+            <div class="section-head" data-reveal>
+              <div>
+                <p class="section-kicker">ENGINEERING</p>
+                <h2>技术栈是实际项目里正在使用的。</h2>
+              </div>
+              <p class="section-desc">
+                当前前端基于 Vue 3 与 Vite，后端基于 Spring Boot、JPA、MySQL、JWT 和邮件服务。生产运行在 Sealos，前端静态资源与 API 代理由统一入口承接。
+              </p>
+            </div>
+
+            <div class="stack-grid">
+              <article class="stack-card featured" data-reveal>
+                <h3>真实架构链路</h3>
+                <p>浏览器访问 TeamTrace 域名，前端负责角色工作台和页面状态，后端提供 REST API、认证、业务计算、文件上传和邮件能力，数据落在 MySQL。</p>
+                <div class="arch-flow">
+                  <div class="arch-node"><b>01</b><strong>Browser</strong><span>Vue SPA</span></div>
+                  <div class="arch-node"><b>02</b><strong>Static Server</strong><span>页面与资源</span></div>
+                  <div class="arch-node"><b>03</b><strong>/api Proxy</strong><span>统一转发</span></div>
+                  <div class="arch-node"><b>04</b><strong>Spring Boot</strong><span>业务服务</span></div>
+                  <div class="arch-node"><b>05</b><strong>MySQL</strong><span>数据持久化</span></div>
+                </div>
+              </article>
+
+              <article class="stack-card" data-reveal>
+                <h3>代码中的技术组成</h3>
+                <div class="tech-list">
+                  <div class="tech-row"><strong>Frontend</strong><span>Vue 3.5、Vite 8、Vue Router、Pinia、Axios、html2pdf.js</span></div>
+                  <div class="tech-row"><strong>Backend</strong><span>Spring Boot 4.0.5、Java 17、Spring Web、JPA、Validation</span></div>
+                  <div class="tech-row"><strong>Data</strong><span>MySQL、Hibernate、Repository Pattern、软删除字段</span></div>
+                  <div class="tech-row"><strong>Security</strong><span>JWT、BCrypt、HTTPS 认证接口检查、角色隔离会话</span></div>
+                  <div class="tech-row"><strong>Ops</strong><span>Sealos DevBox、生产/测试分离、GitHub main、备份归档</span></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="timeline">
+          <div class="section-inner">
+            <div class="section-head" data-reveal>
+              <div>
+                <p class="section-kicker">TIMELINE</p>
+                <h2>可追溯的开发历程。</h2>
+              </div>
+            </div>
+
+            <div class="timeline">
+              <article class="timeline-card" data-reveal>
+                <div class="timeline-date">2026-04-23</div>
+                <div>
+                  <h3>学生端后端能力增强</h3>
+                  <p>补齐学生任务列表/详情、通知筛选、批量已读、操作日志过滤，并统一 Asia/Shanghai 时间口径和任务状态流转。</p>
+                  <div class="tags"><span class="tag">学生任务</span><span class="tag">通知中心</span><span class="tag">定时任务</span></div>
+                </div>
+              </article>
+
+              <article class="timeline-card" data-reveal>
+                <div class="timeline-date">2026-04-29</div>
+                <div>
+                  <h3>从雏形转向真实业务闭环</h3>
+                  <p>完成阶段归档：本地与云端开发环境收口，注册登录产品化，管理员邀请码链路、教师建班链路和学生真实数据接入开始成型。</p>
+                  <div class="tags"><span class="tag">DevBox</span><span class="tag">邀请码</span><span class="tag">班级闭环</span></div>
+                </div>
+              </article>
+
+              <article class="timeline-card" data-reveal>
+                <div class="timeline-date">2026-05</div>
+                <div>
+                  <h3>课堂模式完整闭环</h3>
+                  <p>围绕教师、学生、班级、小组、任务、子任务、互评、教师评分、课程评分、申诉、通知和导出报告持续打通。</p>
+                  <div class="tags"><span class="tag">评分中心</span><span class="tag">申诉闭环</span><span class="tag">报告导出</span></div>
+                </div>
+              </article>
+
+              <article class="timeline-card" data-reveal>
+                <div class="timeline-date">2026-06 上旬</div>
+                <div>
+                  <h3>生产化、管理员端和仪式感功能</h3>
+                  <p>完成管理员端账户与邀请码管理完善、邮件中心、欢迎仪式编号、系统公告、Logo和彩蛋页、产品介绍页，并多次同步生产端和 GitHub main。</p>
+                  <div class="tags"><span class="tag">管理员端</span><span class="tag">邮件中心</span><span class="tag">公告</span></div>
+                </div>
+              </article>
+
+              <article class="timeline-card" data-reveal>
+                <div class="timeline-date">2026-06 中旬</div>
+                <div>
+                  <h3>自由协作 Beta</h3>
+                  <p>新增没有教师监管者的第二产品线：邀请制空间、项目、任务面板、交接、提交、接收/打回、甘特图和协作痕迹，目标是让过程自然可见。</p>
+                  <div class="tags"><span class="tag">自由协作</span><span class="tag">Beta</span><span class="tag">过程可视化</span></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-inner">
+            <div class="section-head" data-reveal>
+              <div>
+                <p class="section-kicker">CODE ANATOMY</p>
+                <h2>当前代码体量。</h2>
+              </div>
+              <p class="section-desc">前端页面体系、后端接口和数据仓储共同构成了当前 TeamTrace 的工程规模。</p>
+            </div>
+
+            <div class="anatomy-grid">
+              <article class="anatomy-card" data-reveal><strong>67k+</strong><h3>源码行数</h3><p>前端约 54,601 行，后端 Java 约 12,988 行。</p></article>
+              <article class="anatomy-card" data-reveal><strong>36</strong><h3>后端控制器</h3><p>覆盖认证、教师、学生、管理员、报告、通知、上传等模块。</p></article>
+              <article class="anatomy-card" data-reveal><strong>33</strong><h3>前端页面</h3><p>学生端、教师端、管理员端、认证页、产品页和自由协作入口。</p></article>
+              <article class="anatomy-card" data-reveal><strong>19</strong><h3>数据仓库</h3><p>以 JPA Repository 管理用户、班级、任务、子任务、评分、申诉等数据。</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-inner">
+            <div class="quote-strip" data-reveal>
+              <p>TeamTrace 最有价值的地方，不是页面数量，而是它把“谁在推进、谁在等待、哪里卡住”变成了可以被看见的过程。</p>
+              <span>这是课堂协作线和自由协作 Beta 共用的产品核心。</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="footer-inner">
+          <span>TeamTrace 开发历程与技术栈，数据来源于当前代码、开发日志和公开统计接口。</span>
+          <span><a href="/#/auth">返回登录</a></span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const formatNumber = (value) => {
+        const number = Number(value);
+        return Number.isFinite(number) ? number.toLocaleString("zh-CN") : "...";
+      };
+
+      async function loadStats() {
+        const note = document.getElementById("stats-note");
+        try {
+          const response = await fetch("/api/public/stats", { headers: { Accept: "application/json" } });
+          if (!response.ok) throw new Error("bad status");
+          const payload = await response.json();
+          const data = payload.data || payload;
+          document.querySelectorAll("[data-stat]").forEach((node) => {
+            const key = node.getAttribute("data-stat");
+            node.textContent = formatNumber(data[key]);
+          });
+          const student = formatNumber(data.studentCount);
+          const teacher = formatNumber(data.teacherCount);
+          note.textContent = `学生 ${student} 位，教师 ${teacher} 位，数据已同步。`;
+        } catch (error) {
+          note.textContent = "";
+        }
+      }
+
+      function setupReveal() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("is-visible");
+            });
+          },
+          { threshold: 0.16 },
+        );
+        document.querySelectorAll("[data-reveal]").forEach((item) => observer.observe(item));
+      }
+
+      function setupCanvas() {
+        const canvas = document.getElementById("trace-canvas");
+        const ctx = canvas.getContext("2d");
+        let width = 0;
+        let height = 0;
+        let particles = [];
+        const count = window.matchMedia("(max-width: 640px)").matches ? 42 : 78;
+
+        function resize() {
+          const rect = canvas.getBoundingClientRect();
+          width = canvas.width = Math.floor(rect.width * window.devicePixelRatio);
+          height = canvas.height = Math.floor(rect.height * window.devicePixelRatio);
+          ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+          particles = Array.from({ length: count }, () => ({
+            x: Math.random() * rect.width,
+            y: Math.random() * rect.height,
+            vx: (Math.random() - 0.5) * 0.34,
+            vy: (Math.random() - 0.5) * 0.34,
+            r: Math.random() * 1.8 + 0.8,
+          }));
+        }
+
+        function tick() {
+          const rect = canvas.getBoundingClientRect();
+          ctx.clearRect(0, 0, rect.width, rect.height);
+          particles.forEach((p, index) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > rect.width) p.vx *= -1;
+            if (p.y < 0 || p.y > rect.height) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = "oklch(0.82 0.15 190 / 0.42)";
+            ctx.fill();
+
+            for (let j = index + 1; j < particles.length; j += 1) {
+              const other = particles[j];
+              const dx = p.x - other.x;
+              const dy = p.y - other.y;
+              const distance = Math.hypot(dx, dy);
+              if (distance < 130) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(other.x, other.y);
+                ctx.strokeStyle = `oklch(0.82 0.15 190 / ${0.14 * (1 - distance / 130)})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+              }
+            }
+          });
+          requestAnimationFrame(tick);
+        }
+
+        resize();
+        window.addEventListener("resize", resize);
+        tick();
+      }
+
+      setupReveal();
+      setupCanvas();
+      loadStats();
+    </script>
+  </body>
+</html>

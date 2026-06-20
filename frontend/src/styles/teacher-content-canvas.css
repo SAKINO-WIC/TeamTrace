@@ -1,0 +1,133 @@
+/**
+ * 教师端内容区与侧栏背景统一、进度条品牌色、信息块表面一致
+ */
+
+[data-teacher-theme='midnight-classroom'] {
+  --teacher-tile-bg: linear-gradient(
+    145deg,
+    var(--tt-surface),
+    color-mix(in srgb, var(--tt-accent) 10%, var(--tt-surface-muted))
+  );
+  --teacher-progress-low: color-mix(in srgb, var(--tt-accent) 38%, var(--tt-surface-muted));
+  --teacher-progress-mid: color-mix(in srgb, var(--tt-accent) 68%, var(--tt-surface-hover));
+  --teacher-progress-high: var(--tt-accent);
+}
+
+:root:not([data-teacher-theme='midnight-classroom']),
+[data-teacher-theme='apple-graphite'] {
+  --teacher-tile-bg: linear-gradient(
+    145deg,
+    var(--tt-surface),
+    color-mix(in srgb, var(--tt-accent) 5%, #f8fafc)
+  );
+  --teacher-progress-low: color-mix(in srgb, var(--tt-accent) 38%, #dbeafe);
+  --teacher-progress-mid: color-mix(in srgb, var(--tt-accent) 68%, #93c5fd);
+  --teacher-progress-high: var(--tt-accent);
+}
+
+/* 主内容区与侧栏同系：浅灰底，去掉明显蓝紫光晕 */
+:root:not([data-teacher-theme='midnight-classroom']) .teacher-layout,
+:root:not([data-teacher-theme='midnight-classroom']) .teacher-main {
+  background: var(--tt-bg);
+}
+
+:root:not([data-teacher-theme='midnight-classroom']) .teacher-layout::before {
+  display: none;
+}
+
+/* 班级概览等信息块与任务列表项统一表面 */
+.teacher-page .info-tile,
+.teacher-page .task-item {
+  background: var(--teacher-tile-bg);
+  border-color: var(--tt-border-subtle);
+}
+
+.teacher-page .task-item:hover {
+  background: linear-gradient(
+    145deg,
+    var(--tt-surface),
+    color-mix(in srgb, var(--tt-accent) 10%, var(--tt-surface-muted))
+  );
+}
+
+/* 任务详情 — 进度条统一为品牌蓝渐变（按完成度深浅区分） */
+.teacher-page .progress-bar.danger {
+  background: linear-gradient(
+    90deg,
+    var(--teacher-progress-low),
+    var(--teacher-progress-mid)
+  );
+}
+
+.teacher-page .progress-bar.warning {
+  background: linear-gradient(
+    90deg,
+    var(--teacher-progress-mid),
+    color-mix(in srgb, var(--tt-accent) 82%, #60a5fa)
+  );
+}
+
+.teacher-page .progress-bar.success {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--tt-accent) 72%, #93c5fd),
+    var(--teacher-progress-high)
+  );
+}
+
+.teacher-page .group-row.success.active,
+.teacher-page .group-row.warning.active,
+.teacher-page .group-row.danger.active {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--tt-accent) 8%, var(--tt-surface-muted)),
+    var(--tt-surface)
+  );
+}
+
+.teacher-page .progress-overview-strip article.danger,
+.teacher-page .progress-overview-strip article.warning,
+.teacher-page .progress-overview-strip article.success {
+  background: var(--teacher-tile-bg);
+  border-color: color-mix(in srgb, var(--tt-accent) 14%, var(--tt-border));
+}
+
+.teacher-page .progress-overview-strip article.danger strong,
+.teacher-page .progress-overview-strip article.warning strong,
+.teacher-page .progress-overview-strip article.success strong {
+  color: var(--tt-accent);
+}
+
+.teacher-page .focus-member-row.warning,
+.teacher-page .focus-member-row.danger {
+  background: color-mix(in srgb, var(--tt-accent) 6%, var(--tt-surface-muted));
+  border-color: color-mix(in srgb, var(--tt-accent) 16%, var(--tt-border));
+}
+
+/* 任务详情 Tab 与顶栏卡片背景统一 */
+.teacher-page.task-detail-page .task-tabs {
+  background: var(--tt-surface);
+  border: 1px solid var(--tt-border-subtle);
+  box-shadow: var(--tt-shadow-xs);
+}
+
+.teacher-page.task-detail-page .tab-btn.active {
+  color: var(--tt-accent);
+  background: var(--tt-accent-soft);
+  box-shadow: none;
+}
+
+.teacher-page.task-detail-page .tab-btn:hover:not(.active) {
+  background: var(--tt-surface-hover);
+}
+
+/* 学生管理 — 统计条与内容区同系 */
+.teacher-page .student-overview {
+  background: var(--teacher-tile-bg);
+  border-color: var(--tt-border-subtle);
+}
+
+.teacher-page .next-step-strip {
+  background: var(--teacher-tile-bg);
+  border-color: color-mix(in srgb, var(--tt-accent) 12%, var(--tt-border));
+}

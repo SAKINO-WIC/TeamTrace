@@ -1,0 +1,291 @@
+/**
+ * Dark theme badge/pill contrast — fixes low-contrast text on tinted pill backgrounds.
+ * Loaded after page/theme CSS so scoped light-theme hardcoded colors are overridden.
+ */
+[data-student-theme='dark'],
+[data-teacher-theme='midnight-classroom'],
+[data-admin-theme='dark'],
+[data-admin-theme='midnight-console'] {
+  /* ── Default accent pills ── */
+  .status-pill:not(.muted):not(.neutral):not(.warning):not(.danger):not(.success):not(.ready):not(.pending):not(.processing):not(.approved):not(.rejected):not(.enabled):not(.status-1):not(.status-2):not(.status-3):not(.status-4),
+  .status-badge:not(.archive):not(.inactive):not(.active):not(.pending):not(.resolved):not(.ended),
+  .badge:not(.muted):not(.neutral):not(.success):not(.warning):not(.danger),
+  .context-badge,
+  .class-pill,
+  .task-tag,
+  .scope-state,
+  .score-row-clickable .tag,
+  span.tag:not(p.tag),
+  .student-progress-badge,
+  .read-badge.unread,
+  .summary-chip.active {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    box-shadow: none !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  /* ── Success / active ── */
+  .status-badge.active,
+  .status-pill.success,
+  .status-pill.ready,
+  .status-pill.status-4,
+  .status-pill.approved,
+  .badge.success,
+  .type-badge.subtask,
+  .type-pill.success {
+    background: var(--tt-success-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-success) 28%, var(--tt-border)) !important;
+    box-shadow: none !important;
+    color: #86efac !important;
+  }
+
+  /* ── Warning / pending ── */
+  .status-badge.inactive,
+  .status-pill.warning,
+  .status-pill.pending,
+  .status-pill.status-3,
+  .badge.warning,
+  .type-badge.peer_review,
+  .type-pill.warning {
+    background: var(--tt-warning-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-warning) 28%, var(--tt-border)) !important;
+    box-shadow: none !important;
+    color: #fbbf24 !important;
+  }
+
+  /* ── Danger ── */
+  .status-pill.danger,
+  .status-pill.rejected,
+  .badge.danger,
+  .status-badge.pending,
+  .repeat-badge,
+  .type-pill.danger {
+    background: var(--tt-danger-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-danger) 28%, var(--tt-border)) !important;
+    box-shadow: none !important;
+    color: #fca5a5 !important;
+  }
+
+  /* ── Muted / neutral / archive ── */
+  .status-badge.resolved,
+  .status-badge.archive,
+  .status-badge.ended,
+  .status-pill.muted,
+  .status-pill.neutral,
+  .status-pill.status-1,
+  .badge.neutral,
+  .mini-tag:not(.subtle),
+  .read-badge:not(.unread),
+  .metric-chip,
+  .type-pill.default {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    box-shadow: none !important;
+    color: var(--tt-text-secondary) !important;
+  }
+
+  /* ── Accent subtle variants ── */
+  .mini-tag.subtle,
+  .type-badge.teacher_score,
+  .group-badge:not(.muted),
+  .status-pill.processing,
+  .status-pill.enabled,
+  .status-pill.status-2,
+  .badge.muted,
+  .assign-pill,
+  .default-pill {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    box-shadow: none !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .group-badge.muted {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text-secondary) !important;
+  }
+
+  /* ── Peer review score / alias pills ── */
+  .alias-pill:not(.target),
+  .score-pill.steady {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .alias-pill.target,
+  .score-pill.strong {
+    background: var(--tt-success-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-success) 28%, var(--tt-border)) !important;
+    color: #86efac !important;
+  }
+
+  .score-pill.low {
+    background: var(--tt-warning-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-warning) 28%, var(--tt-border)) !important;
+    color: #fbbf24 !important;
+  }
+
+  .score-pill.neutral {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text-secondary) !important;
+  }
+
+  /* ── Class / member / home pills ── */
+  .entry-badge,
+  .workbench-pill,
+  .urgent-badge {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .readonly-badge,
+  .member-badge:not(.leader) {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text-secondary) !important;
+  }
+
+  .member-badge.leader {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .class-badge {
+    background: var(--tt-success-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-success) 28%, var(--tt-border)) !important;
+    color: #86efac !important;
+  }
+
+  .wait-pill {
+    background: var(--tt-warning-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-warning) 28%, var(--tt-border)) !important;
+    color: #fbbf24 !important;
+  }
+
+  .member-count {
+    background: var(--tt-success-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-success) 28%, var(--tt-border)) !important;
+    color: #86efac !important;
+  }
+
+  .hero-badge:not(.soft),
+  .popup-badge.self {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .hero-badge.soft,
+  .popup-badge:not(.leader):not(.self) {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text-secondary) !important;
+  }
+
+  .popup-badge.leader {
+    background: var(--tt-success-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-success) 28%, var(--tt-border)) !important;
+    color: #86efac !important;
+  }
+
+  .state-btn.locked {
+    background: var(--tt-warning-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-warning) 28%, var(--tt-border)) !important;
+    color: #fbbf24 !important;
+  }
+
+  /* ── Student task card status buttons ── */
+  .task-card-btn--status.pending {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text-secondary) !important;
+  }
+
+  .task-card-btn--status.active {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .task-card-btn--status.urgent {
+    background: var(--tt-warning-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-warning) 28%, var(--tt-border)) !important;
+    color: #fbbf24 !important;
+  }
+
+  .task-card-btn--status.overdue,
+  .task-card-btn--status.closed {
+    background: var(--tt-danger-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-danger) 28%, var(--tt-border)) !important;
+    color: #fca5a5 !important;
+  }
+
+  /* ── Student class detail task tags ── */
+  .task-tags .task-kind {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    box-shadow: none !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .task-tags .task-status.is-active {
+    background: var(--tt-success-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-success) 28%, var(--tt-border)) !important;
+    box-shadow: none !important;
+    color: #86efac !important;
+  }
+
+  .task-tags .task-status.is-pending {
+    background: var(--tt-warning-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-warning) 28%, var(--tt-border)) !important;
+    box-shadow: none !important;
+    color: #fbbf24 !important;
+  }
+
+  .task-tags .task-status.is-ended {
+    background: var(--tt-surface-muted) !important;
+    border-color: var(--tt-border) !important;
+    box-shadow: none !important;
+    color: var(--tt-text-secondary) !important;
+  }
+
+  /* ── Runtime mode banner (dev/mock indicator) ── */
+  .runtime-banner.live {
+    background: var(--tt-success-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-success) 28%, var(--tt-border)) !important;
+    color: #86efac !important;
+  }
+
+  .runtime-banner.live .runtime-badge {
+    background: color-mix(in srgb, var(--tt-success) 22%, var(--tt-surface-muted)) !important;
+    color: #86efac !important;
+  }
+
+  .runtime-banner.hybrid {
+    background: var(--tt-accent-soft) !important;
+    border-color: var(--tt-accent-border) !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .runtime-banner.hybrid .runtime-badge {
+    background: color-mix(in srgb, var(--tt-accent) 22%, var(--tt-surface-muted)) !important;
+    color: var(--tt-accent-secondary) !important;
+  }
+
+  .runtime-banner.mock {
+    background: var(--tt-warning-soft) !important;
+    border-color: color-mix(in srgb, var(--tt-warning) 28%, var(--tt-border)) !important;
+    color: #fbbf24 !important;
+  }
+
+  .runtime-banner.mock .runtime-badge {
+    background: color-mix(in srgb, var(--tt-warning) 22%, var(--tt-surface-muted)) !important;
+    color: #fbbf24 !important;
+  }
+}

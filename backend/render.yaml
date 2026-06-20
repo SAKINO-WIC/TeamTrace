@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: team-trace-backend
+    runtime: docker
+    envVars:
+      - key: SERVER_PORT
+        value: "8080"
+      - key: JWT_SECRET
+        value: "250b8383d764d32e6bfcb8935f135a5c4a0b18288a2f9649be7ece98024838e9"
+      - key: TEAMTRACE_REQUIRE_HTTPS_FOR_AUTH
+        value: "false"

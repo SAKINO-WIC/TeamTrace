@@ -1,0 +1,448 @@
+/**
+ * 学生端弹窗面板 — 与 teacher-dialog.css 遮罩层配合，统一便当卡片风格
+ */
+
+.dialog-panel {
+  width: min(100%, 480px);
+  max-height: min(88vh, 820px);
+  overflow: auto;
+  padding: var(--tt-space-6);
+  border-radius: var(--tt-radius-xl);
+  background: var(--tt-bg-elevated);
+  border: 1px solid var(--tt-border);
+  box-shadow: var(--tt-shadow-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--tt-space-3);
+  animation: tt-modal-pop 180ms var(--tt-ease-ios);
+}
+
+.dialog-panel.wide-dialog {
+  width: min(760px, var(--tt-dialog-available-width, 100%));
+}
+
+.dialog-panel.review-dialog {
+  width: min(1080px, var(--tt-dialog-available-width, 100%));
+}
+
+.dialog-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--tt-space-4);
+  padding-bottom: var(--tt-space-4);
+  border-bottom: 1px solid var(--tt-divider);
+}
+
+.dialog-head h3,
+.dialog-title {
+  margin: 0;
+  font-size: var(--tt-text-lg);
+  font-weight: 700;
+  color: var(--tt-text);
+  line-height: 1.3;
+}
+
+.dialog-head .eyebrow,
+.dialog-eyebrow {
+  margin: 0 0 6px;
+  min-height: 28px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tt-accent);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--tt-accent-soft);
+  border: 1px solid var(--tt-accent-border);
+}
+
+.dialog-desc {
+  margin: 0;
+  font-size: var(--tt-text-sm);
+  line-height: 1.6;
+  color: var(--tt-text-secondary);
+}
+
+.dialog-body {
+  display: grid;
+  gap: var(--tt-space-3);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--tt-space-2);
+  margin-top: var(--tt-space-2);
+}
+
+.dialog-btn,
+.dialog-panel .primary-btn,
+.dialog-panel .secondary-btn {
+  min-height: 40px;
+  padding: 0 var(--tt-space-4);
+  border-radius: var(--tt-radius-md);
+  font-family: var(--tt-font);
+  font-size: var(--tt-text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--tt-duration-fast) var(--tt-ease);
+}
+
+.dialog-btn.cancel,
+.dialog-panel .secondary-btn {
+  background: var(--tt-surface-muted);
+  color: var(--tt-text-secondary);
+  border: 1px solid var(--tt-border);
+}
+
+.dialog-btn.cancel:hover,
+.dialog-panel .secondary-btn:hover:not(:disabled) {
+  background: var(--tt-surface-hover);
+  color: var(--tt-text);
+}
+
+.dialog-btn.confirm,
+.dialog-panel .primary-btn {
+  background: var(--tt-accent-gradient);
+  color: var(--tt-text-inverse);
+  border: 1px solid transparent;
+  box-shadow: var(--tt-shadow-accent);
+}
+
+.dialog-btn.confirm:hover:not(:disabled),
+.dialog-panel .primary-btn:hover:not(:disabled) {
+  filter: brightness(1.04);
+}
+
+.dialog-btn.confirm:disabled,
+.dialog-panel .primary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.field-label {
+  font-size: var(--tt-text-sm);
+  font-weight: 600;
+  color: var(--tt-text-secondary);
+}
+
+.field-hint {
+  margin: 0;
+  font-size: var(--tt-text-xs);
+  color: var(--tt-text-tertiary);
+  line-height: 1.5;
+}
+
+.field-error,
+.join-error {
+  margin: 0;
+  font-size: var(--tt-text-sm);
+  color: var(--tt-danger);
+}
+
+.dialog-input,
+.dialog-select,
+.join-input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 0 var(--tt-space-3);
+  border: 1px solid var(--tt-border);
+  border-radius: var(--tt-radius-md);
+  background: var(--tt-surface);
+  color: var(--tt-text);
+  font-family: var(--tt-font);
+  font-size: var(--tt-text-sm);
+  transition: border-color var(--tt-duration-fast) var(--tt-ease);
+}
+
+.dialog-input:focus,
+.dialog-select:focus,
+.join-input:focus {
+  outline: none;
+  border-color: var(--tt-accent);
+  box-shadow: 0 0 0 3px var(--tt-accent-soft);
+}
+
+.dialog-input.error {
+  border-color: var(--tt-danger);
+}
+
+.confirm-panel.inline-confirm {
+  width: min(100%, 440px);
+  display: grid;
+  gap: var(--tt-space-4);
+}
+
+.confirm-panel.inline-confirm .confirm-title {
+  margin: 0;
+  font-size: var(--tt-text-lg);
+  font-weight: 700;
+  color: var(--tt-text);
+}
+
+.confirm-panel.inline-confirm .confirm-body {
+  display: grid;
+  gap: var(--tt-space-2);
+}
+
+html[data-student-theme='dark'] .pool-detail-dialog,
+html[data-student-theme='dark'] .dialog-panel.pool-detail-dialog {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--tt-accent) 10%, transparent), transparent 42%),
+    var(--tt-surface) !important;
+  border-color: var(--tt-border) !important;
+}
+
+html[data-student-theme='dark'] .dialog-panel {
+  background: var(--tt-surface);
+  border-color: var(--tt-border);
+}
+
+html[data-student-theme='dark'] .pool-detail-field input,
+html[data-student-theme='dark'] .pool-detail-field textarea {
+  background: var(--tt-surface-muted) !important;
+  border-color: var(--tt-border-subtle) !important;
+  color: var(--tt-text) !important;
+}
+
+html[data-student-theme='dark'] .dialog-head {
+  border-bottom-color: var(--tt-border);
+}
+
+html[data-student-theme='dark'] .dialog-input,
+html[data-student-theme='dark'] .dialog-select,
+html[data-student-theme='dark'] .join-input {
+  background: var(--tt-surface-muted);
+  border-color: var(--tt-border);
+  color: var(--tt-text);
+}
+
+html[data-student-theme='dark'] .radio-item {
+  background: var(--tt-surface-muted);
+  border-color: var(--tt-border-subtle);
+}
+
+.radio-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--tt-space-3);
+  align-items: flex-start;
+  padding: var(--tt-space-3);
+  border-radius: var(--tt-radius-md);
+  background: var(--tt-surface-muted);
+  border: 1px solid var(--tt-border-subtle);
+}
+
+.radio-item strong,
+.radio-item span {
+  display: block;
+}
+
+.radio-item span {
+  margin-top: 4px;
+  font-size: var(--tt-text-xs);
+  color: var(--tt-text-secondary);
+  line-height: 1.5;
+}
+
+/* ── 加入班级弹窗（首页 / 班级中心） ── */
+.join-class-dialog {
+  width: min(100%, 440px);
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--tt-accent) 14%, var(--tt-border));
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--tt-accent) 14%, transparent), transparent 42%),
+    var(--tt-bg-elevated);
+  box-shadow:
+    0 24px 48px color-mix(in srgb, var(--tt-accent) 12%, transparent),
+    var(--tt-shadow-xl);
+}
+
+.join-dialog-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--tt-accent) 8%, var(--tt-divider));
+}
+
+.join-dialog-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  color: var(--tt-accent);
+  background: color-mix(in srgb, var(--tt-accent) 12%, #fff);
+  border: 1px solid color-mix(in srgb, var(--tt-accent) 20%, transparent);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--tt-accent) 14%, transparent);
+}
+
+.join-dialog-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.join-dialog-head-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 52px;
+}
+
+.join-dialog-head-copy .dialog-eyebrow {
+  margin: 0;
+  align-self: flex-start;
+}
+
+.join-dialog-head-copy .dialog-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.join-dialog-head-copy .dialog-desc {
+  font-size: 14px;
+}
+
+.join-dialog-body {
+  padding: 20px 24px 8px;
+  gap: 10px;
+}
+
+.join-code-input {
+  height: 52px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  border-color: color-mix(in srgb, var(--tt-accent) 18%, var(--tt-border));
+  background: color-mix(in srgb, var(--tt-accent) 4%, var(--tt-surface));
+}
+
+.join-code-input::placeholder {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--tt-text-tertiary);
+}
+
+.join-code-input:focus {
+  border-color: var(--tt-accent);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--tt-accent) 16%, transparent),
+    0 4px 16px color-mix(in srgb, var(--tt-accent) 10%, transparent);
+}
+
+.join-dialog-actions {
+  margin-top: 0;
+  padding: 16px 24px 24px;
+  border-top: 1px solid color-mix(in srgb, var(--tt-accent) 8%, var(--tt-divider));
+  background: color-mix(in srgb, var(--tt-accent) 3%, var(--tt-surface-muted));
+}
+
+.join-class-dialog .primary-btn {
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--tt-accent), color-mix(in srgb, var(--tt-accent) 78%, #0056d6));
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--tt-accent) 30%, transparent);
+}
+
+.join-class-dialog .primary-btn:hover:not(:disabled) {
+  filter: brightness(1.05);
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--tt-accent) 36%, transparent);
+}
+
+.join-class-dialog .secondary-btn {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+html[data-student-theme='dark'] .join-class-dialog {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--tt-accent) 16%, transparent), transparent 42%),
+    var(--tt-surface) !important;
+  border-color: color-mix(in srgb, var(--tt-accent) 22%, var(--tt-border)) !important;
+}
+
+html[data-student-theme='dark'] .join-dialog-icon {
+  background: color-mix(in srgb, var(--tt-accent) 18%, var(--tt-surface-muted));
+}
+
+html[data-student-theme='dark'] .join-code-input {
+  background: var(--tt-surface-muted) !important;
+}
+
+html[data-student-theme='dark'] .join-dialog-actions {
+  background: color-mix(in srgb, var(--tt-accent) 6%, var(--tt-surface-muted));
+}
+
+@media (max-width: 640px) {
+  .dialog-panel {
+    width: min(100%, var(--tt-dialog-available-width, 100%));
+    padding: var(--tt-space-5);
+  }
+
+  .join-class-dialog {
+    width: min(100%, var(--tt-dialog-available-width, 100%));
+    padding: 0;
+  }
+
+  .join-dialog-hero {
+    padding: 20px 20px 16px;
+  }
+
+  .join-dialog-body,
+  .join-dialog-actions {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .join-dialog-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .join-class-dialog .primary-btn,
+  .join-class-dialog .secondary-btn {
+    width: 100%;
+  }
+}
+
+html[data-student-theme] .dialog-overlay > .submit-dialog {
+  display: grid !important;
+  overflow: hidden !important;
+  max-height: min(88vh, 720px) !important;
+}
+
+html[data-student-theme] .submit-dialog .submit-dialog-body {
+  min-height: 0;
+}
+
+html[data-student-theme] .submit-dialog .submit-field textarea:not(:disabled),
+html[data-student-theme] .submit-dialog .submit-field input:not(:disabled) {
+  pointer-events: auto !important;
+  cursor: text !important;
+}
