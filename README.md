@@ -97,7 +97,6 @@ MAIL_FROM
 MAIL_FROM_NAME
 ```
 
-不要把真实 `.env`、数据库导出、生产备份、邮箱密钥或 GitHub token 提交到仓库。
 
 ## 构建
 
@@ -138,13 +137,6 @@ docker build -t teamtrace-backend .
 
 本仓库已经排除真实运行配置、构建产物、日志、上传文件和数据库备份。
 
-如果你从旧仓库迁移而来，建议检查并轮换历史中可能暴露过的密钥，包括：
-
-- 数据库密码
-- JWT secret
-- 管理员默认密码
-- 邮件服务 API key
-
 ## 状态
 
 当前版本是课程项目的最终收尾快照：
@@ -153,4 +145,4 @@ docker build -t teamtrace-backend .
 - 后端来源：`team-trace-backend` main `4b15e6d`
 - 文档来源：`team-trace-project` main `5d149fa`
 
-旧三仓建议保留为 private 或 archive，用于必要时回溯。
+旧三仓已经设置为private, 暂时不公开。
